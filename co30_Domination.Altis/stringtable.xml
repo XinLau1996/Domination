@@ -14199,7 +14199,7 @@
 <Korean>Block but not for missile launchers</Korean>
 <Japanese>Block but not for missile launchers</Japanese>
 <Original>Block but not for missile launchers</Original>
-<Russian>Block but not for missile launchers</Russian>
+<Russian>Блокировать, но не для ракетных установок</Russian>
 <Chinesesimp>禁用但不适用于导弹发射器</Chinesesimp>
 <Chinese>Block but not for missile launchers</Chinese>
 <French>Block but not for missile launchers</French>
@@ -14211,8 +14211,8 @@
 <Korean>The enemy is about too launch a tactical ballistic missile from a mobile launch vehicle!! Get there and DESTROY it!!!!</Korean>
 <Japanese>The enemy is about too launch a tactical ballistic missile from a mobile launch vehicle!! Get there and DESTROY it!!!!</Japanese>
 <Original>The enemy is about too launch a tactical ballistic missile from a mobile launch vehicle!! Get there and DESTROY it!!!!</Original>
-<Russian>The enemy is about too launch a tactical ballistic missile from a mobile launch vehicle!! Get there and DESTROY it!!!!</Russian>
-<Chinesesimp>The enemy is about too launch a tactical ballistic missile from a mobile launch vehicle!! Get there and DESTROY it!!!!</Chinesesimp>
+<Russian>Противник вот-вот запустит тактическую баллистическую ракету с мобильной стартовой площадки !! Доберитесь и УНИЧТОЖИТЕ её !!!!</Russian>
+<Chinesesimp>敌人将从移动发射台发射战术弹道导弹！找到它并摧毁它！！！！</Chinesesimp>
 <Chinese>The enemy is about too launch a tactical ballistic missile from a mobile launch vehicle!! Get there and DESTROY it!!!!</Chinese>
 <French>The enemy is about too launch a tactical ballistic missile from a mobile launch vehicle!! Get there and DESTROY it!!!!</French>
 </Key>
@@ -14223,8 +14223,8 @@
 <Korean>Good work! The launch is stopped.</Korean>
 <Japanese>Good work! The launch is stopped.</Japanese>
 <Original>Good work! The launch is stopped.</Original>
-<Russian>Good work! The launch is stopped.</Russian>
-<Chinesesimp>Good work! The launch is stopped.</Chinesesimp>
+<Russian>орошая работа! Запуск остановлен.</Russian>
+<Chinesesimp>做得好！启动停止。</Chinesesimp>
 <Chinese>Good work! The launch is stopped.</Chinese>
 <French>Good work! The launch is stopped.</French>
 </Key>
@@ -14235,8 +14235,8 @@
 <Korean>Disable player artillery</Korean>
 <Japanese>Disable player artillery</Japanese>
 <Original>Disable player artillery</Original>
-<Russian>Disable player artillery</Russian>
-<Chinesesimp>Disable player artillery</Chinesesimp>
+<Russian>Отключить артиллерию для игрока</Russian>
+<Chinesesimp>禁用玩家火炮</Chinesesimp>
 <Chinese>Disable player artillery</Chinese>
 <French>Disable player artillery</French>
 </Key>
@@ -14247,8 +14247,8 @@
 <Korean>Disable player CAS</Korean>
 <Japanese>Disable player CAS</Japanese>
 <Original>Disable player CAS</Original>
-<Russian>Disable player CAS</Russian>
-<Chinesesimp>Disable player CAS</Chinesesimp>
+<Russian>Отключить CAS для игрока</Russian>
+<Chinesesimp>禁用玩家 CAS（近距离空中支援）</Chinesesimp>
 <Chinese>Disable player CAS</Chinese>
 <French>Disable player CAS</French>
 </Key>

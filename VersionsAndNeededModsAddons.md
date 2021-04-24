@@ -91,3 +91,8 @@
 - **Unsung Blufor** (co40_domination_4_30_blufor_usnung.song_bin_tanh.pbo)
 
   > 需要 [Unsung](https://steamcommunity.com/workshop/filedetails/?id=943001311) 模组
+
+### **S.O.G. Prairie Fire DL**
+
+- **Weferlingen Blufor** (co40_domination_x_xx_blufor.cam_lao_nam.pbo)
+  > 需要 [S.O.G. Prairie Fire DLC](https://store.steampowered.com/app/1227700/Arma_3_Creator_DLC_SOG_Prairie_Fire/) 
