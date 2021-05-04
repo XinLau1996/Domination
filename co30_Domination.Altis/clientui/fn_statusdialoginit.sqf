@@ -1,5 +1,4 @@
 // by Xeno
-#define THIS_FILE "fn_statusdialoginit.sqf"
 #include "..\x_setup.sqf"
 #define __ctrl(vctrl) _ctrl = _disp displayCtrl vctrl
 #define __ctrl2(ectrl) (_disp displayCtrl ectrl)
@@ -307,7 +306,7 @@ __ctrl2(1610) ctrlAddEventHandler ["CheckedChanged", {
 }];
 #endif
 
-__ctrl2(1612) cbSetChecked d_player_radioprotocol;
+/*__ctrl2(1612) cbSetChecked d_player_radioprotocol;
 __ctrl2(1612) ctrlAddEventHandler ["CheckedChanged", {
 	d_player_radioprotocol = !d_player_radioprotocol;
 	if (d_player_radioprotocol) then {
@@ -319,6 +318,7 @@ __ctrl2(1612) ctrlAddEventHandler ["CheckedChanged", {
 	};
 	profileNamespace setVariable ["dom_player_radioprotocol", d_player_radioprotocol];
 }];
+*/
 
 for "_i" from 1 to 20 do {
 	private _usera = (str (actionKeysNamesArray format ["User%1", _i])) splitString "[,]";

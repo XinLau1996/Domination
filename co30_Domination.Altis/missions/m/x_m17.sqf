@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "x_m17.sqf"
 #include "..\..\x_setup.sqf"
 
 d_x_sm_pos = [[13350.1,12877.3,0], [13359.6,12895.4,0]]; // index: 17,   Officer in Olsha
@@ -25,7 +24,6 @@ if (isServer) then {
 	private _newgroup = [d_side_enemy] call d_fnc_creategroup;
 	private _sm_vec = _newgroup createUnit [d_soldier_officer, _poss, [], 0, "NONE"];
 	[_sm_vec] joinSilent _newgroup;
-	_newgroup deleteGroupWhenEmpty true;
 	_sm_vec call d_fnc_removenvgoggles_fak;
 	_sm_vec call d_fnc_addkillednormal;
 	d_x_sm_rem_ar pushBack _sm_vec;

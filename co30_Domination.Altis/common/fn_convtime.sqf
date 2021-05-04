@@ -1,8 +1,6 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_convtime.sqf"
 #include "..\x_setup.sqf"
-
 
 private _ars = [];
 private _res = round (_this / 86400);

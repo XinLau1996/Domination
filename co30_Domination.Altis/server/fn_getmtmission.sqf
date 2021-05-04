@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_getmtmission.sqf"
 #include "..\x_setup.sqf"
 
 params ["_wp_array", "_mtradius", "_trg_center"];
@@ -28,7 +27,6 @@ _poss set [2, 0];
 _newgroup = [d_side_enemy] call d_fnc_creategroup;\
 private _specus = [_poss, ["specops", d_enemy_side_short] call d_fnc_getunitlistm, _newgroup, true, true] call d_fnc_makemgroup;\
 sleep 1.0112;\
-_newgroup deleteGroupWhenEmpty true; \
 _newgroup allowFleeing 0;\
 _newgroup setVariable ["d_defend", true]; \
 [_newgroup, _poss] spawn d_fnc_taskDefend; \
@@ -90,7 +88,6 @@ switch (_sec_kind) do {
 		private _newgroup = [d_side_enemy] call d_fnc_creategroup;
 		private _vec = _newgroup createUnit [d_soldier_officer, _poss, [], 0, "NONE"];
 		[_vec] joinSilent _newgroup;
-		_newgroup deleteGroupWhenEmpty true;
 		_vec call d_fnc_removenvgoggles_fak;
 		
 		if ((_forar # 0) isEqualTo []) then {
@@ -304,10 +301,13 @@ switch (_sec_kind) do {
 		private _forar = _poss call _fnc_makefortress;
 		__TRACE_1("","_forar")
 		private _newgroup = [d_side_enemy] call d_fnc_creategroup;
+#ifndef __VN__
 		private _ctype = "C_man_polo_6_F";
+#else
+		private _ctype = "vn_c_men_02";
+#endif
 		private _vec = _newgroup createUnit [_ctype, _poss, [], 0, "NONE"];
 		[_vec] joinSilent _newgroup;
-		_newgroup deleteGroupWhenEmpty true;
 		_vec call d_fnc_removenvgoggles_fak;
 		if ((_forar # 0) isEqualTo []) then {
 			private _svec = 1;
@@ -326,8 +326,13 @@ switch (_sec_kind) do {
 		_vec disableAI "PATH";
 		d_delinfsm pushBack _vec;
 		d_fixor_var = _vec;
+#ifndef __VN__
 		_vec addMagazines ["16Rnd_9x21_Mag", 2];
 		_vec addWeapon "hgun_Rook40_F";
+#else
+		_vec addMagazines ["vn_hd_mag", 2];
+		_vec addWeapon "vn_hd";
+#endif
 		if ({_x == 1} count d_searchintel < count d_searchintel) then {
 			d_intel_unit = _vec;
 			d_searchbody = _vec; publicVariable "d_searchbody";
@@ -357,10 +362,13 @@ switch (_sec_kind) do {
 		private _forar = _poss call _fnc_makefortress;
 		__TRACE_1("","_forar")
 		private _newgroup = [d_side_enemy] call d_fnc_creategroup;
+#ifndef __VN__
 		private _ctype = "C_man_1_3_F";
+#else
+		private _ctype = "vn_c_men_03";
+#endif
 		private _vec = _newgroup createUnit [_ctype, _poss, [], 0, "NONE"];
 		[_vec] joinSilent _newgroup;
-		_newgroup deleteGroupWhenEmpty true;
 		_vec call d_fnc_removenvgoggles_fak;
 		if ((_forar # 0) isEqualTo []) then {
 			private _svec = 1;

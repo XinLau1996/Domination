@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_checkmtshothd.sqf"
 #include "..\x_setup.sqf"
 
 __TRACE_1("","_this")
@@ -15,7 +14,7 @@ _mm = toLowerANSI(getText(configFile>>"CfgAmmo">>(_this # 4)>>"simulation"));
 __TRACE_1("","_mm")
 #endif
 private _r = if ((_this # 4) call d_fnc_checksimminet) then {
-	_this # 2
+	(_this # 2) * 1.1
 } else {
 	0
 };

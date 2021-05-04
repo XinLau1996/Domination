@@ -1,6 +1,5 @@
 // d_init include server
 #ifndef __XSETUP_INCL__
-#define THIS_FILE "i_server.sqf"
 #include "x_setup.sqf"
 #endif
 
@@ -122,7 +121,12 @@ if (isServer) then {
 
 	if (d_with_ai) then {
 		d_pos_ai_hut = [markerPos "d_pos_aihut", markerDir "d_pos_aihut"];
-		d_AI_HUT = createVehicle ["Land_CashDesk_F", d_pos_ai_hut # 0, [], 0, "NONE"];
+		if (!d_vn) then {
+			d_AI_HUT = createVehicle ["Land_CashDesk_F", d_pos_ai_hut # 0, [], 0, "NONE"];
+		} else {
+			d_AI_HUT = createVehicle ["Land_vn_infostand_v2_f", d_pos_ai_hut # 0, [], 0, "NONE"];
+			d_AI_HUT setObjectTextureGlobal [0, "pics\AI.paa"];
+		};
 		d_AI_HUT setDir (d_pos_ai_hut # 1);
 		if (!d_carrier) then {
 			d_AI_HUT setPos (d_pos_ai_hut # 0);

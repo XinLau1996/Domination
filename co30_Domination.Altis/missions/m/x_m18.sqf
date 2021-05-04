@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "x_m18.sqf"
 #include "..\..\x_setup.sqf"
 
 d_x_sm_pos = [[13077,10094.4,0], [13063.8,10129.3,0]]; // index: 18,   Government member visit in Berezino shipyard
@@ -24,7 +23,6 @@ if (isServer) then {
 	private _newgroup = [d_side_enemy] call d_fnc_creategroup;
 	private _sm_vec = _newgroup createUnit [d_soldier_officer, _poss, [], 0, "NONE"];
 	[_sm_vec] joinSilent _newgroup;
-	_newgroup deleteGroupWhenEmpty true;
 	_sm_vec call d_fnc_removenvgoggles_fak;
 	_sm_vec call d_fnc_addkillednormal;
 	d_x_sm_rem_ar pushBack _sm_vec;

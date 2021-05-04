@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "init.sqf"
 #include "x_setup.sqf"
 diag_log [diag_frameno, diag_ticktime, time, "Executing Dom init.sqf"];
 
@@ -14,6 +13,7 @@ if (isMultiplayer && {hasInterface}) then {
 	enableRadio false;
 	showChat false;
 	0 fadeSound 0;
+	0 fadeEnvironment 0;
 	titleText ["", "BLACK FADED"];
 };
 
@@ -27,6 +27,22 @@ if (isServer) then {
 	diag_log ["DOM init.sqf, setting date back to 1944..."];
 	private _date = date;
 	_date set [0, 1944];
+	setDate _date;
+};
+#endif
+#ifdef __VN__
+if (isServer) then {
+	diag_log ["DOM init.sqf, setting date back to 1971..."];
+	private _date = date;
+	_date set [0, 1971];
+	setDate _date;
+};
+#endif
+#ifdef __UNSUNG__
+if (isServer) then {
+	diag_log ["DOM init.sqf, setting date back to 1971..."];
+	private _date = date;
+	_date set [0, 1971];
 	setDate _date;
 };
 #endif

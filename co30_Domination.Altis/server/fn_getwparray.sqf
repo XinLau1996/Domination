@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_getwparray.sqf"
 #include "..\x_setup.sqf"
 
 __TRACE_1("","_this")
@@ -11,8 +10,8 @@ private _wfunc = if (_mode isEqualTo 0) then {
 	d_fnc_GetRanPointCircleOuter
 };
 private _wp_a = [];
-_wp_a resize 60;
-for "_i" from 0 to 59 do {
+_wp_a resize 100;
+for "_i" from 0 to 99 do {
 	private _point = [_tc, _radius, _sizem, _maxgrad, 0, false, false] call _wfunc;
 	if (_point isEqualTo []) then {
 		for "_e" from 0 to 49 do {

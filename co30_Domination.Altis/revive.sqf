@@ -1,5 +1,4 @@
-#define THIS_FILE "revive.sqf"
-#include "x_macros.sqf";
+#include "x_macros.sqf"
 
 diag_log "DOM initializing revive";
 

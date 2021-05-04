@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_vrespawn2.sqf"
 #include "..\x_setup.sqf"
 
 sleep (8 + round 5);
@@ -161,6 +160,7 @@ while {true} do {
 			if (_vec isKindOf "Boat_F") then {
 				_vec remoteExecCall ["d_fnc_addpushaction", [0, -2] select isDedicated];
 			};
+			_vec setDamage 0;
 		};
 		sleep (8 + random 5);
 	} forEach d_vrespawn2_ar;

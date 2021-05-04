@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_createpara3x.sqf"
 #include "..\x_setup.sqf"
 
 params ["_startpoint", "_attackpoint", "_flytopos", "_heliendpoint", "_number_vehicles"];
@@ -224,7 +223,7 @@ private _make_jump = {
 					_paragrp setVariable ["d_ktypett", 1];
 				};
 #endif
-				_paragrp deleteGroupWhenEmpty true;
+
 				__TRACE_1("","_real_units")
 #ifndef __TT__
 				(units _paragrp) call d_fnc_addceo;
@@ -316,7 +315,6 @@ private _make_jump = {
 					_paragrp setVariable ["d_ktypett", 1];
 				};
 #endif
-				_paragrp deleteGroupWhenEmpty true;
 				__TRACE_1("","_real_units")
 #ifndef __TT__
 				(units _paragrp) call d_fnc_addceo;
@@ -406,8 +404,6 @@ while {_icounter < _number_vehicles} do {
 	_vec spawn d_fnc_airmarkermove;
 
 	_vec lock true;
-
-	_vgrp deleteGroupWhenEmpty true;
 	
 	if (d_with_dynsim == 0) then {
 		_vec setVariable ["d_nodyn", true];

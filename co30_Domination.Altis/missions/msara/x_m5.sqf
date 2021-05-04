@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "x_m5.sqf"
 #include "..\..\x_setup.sqf"
 
 d_x_sm_pos = [[10269.6,7353.71,0], [10268.4,7313.75,0]];  // index: 5,   King of Sedia at hotel in Vallejo
@@ -14,9 +13,8 @@ if (hasInterface) then {
 if (isServer) then {
 	d_x_sm_pos params ["_poss"];
 	private _newgroup = [d_side_enemy] call d_fnc_creategroup;
-	private _sm_vec = _newgroup createUnit [d_functionary, _poss, [], 0, "NONE"]
+	private _sm_vec = _newgroup createUnit [d_functionary, _poss, [], 0, "NONE"];
 	[_sm_vec] joinSilent _newgroup;
-	_newgroup deleteGroupWhenEmpty true;
 	_sm_vec call d_fnc_removenvgoggles_fak;
 	_sm_vec call d_fnc_addkillednormal;
 	d_x_sm_rem_ar pushBack _sm_vec;

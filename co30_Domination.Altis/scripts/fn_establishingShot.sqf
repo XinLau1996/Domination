@@ -1,5 +1,4 @@
 //#define __DEBUG__
-#define THIS_FILE "fn_establishingShot.sqf"
 #include "..\x_setup.sqf"
 /*
 	Author: Thomas Ryan
@@ -128,30 +127,30 @@ if (_mode == 1) then {
 	"d_sat_timode" cutRsc ["d_sat_timode","PLAIN"];
 	((uiNamespace getVariable "d_sat_timode") displayCtrl 50) ctrlSetText "Off";
 	private _skipEH = (findDisplay 46) displayAddEventHandler ["KeyDown", {
-			if (_this # 1 == 57) then {
-				(findDisplay 46) displayRemoveEventHandler ["KeyDown", uiNamespace getVariable "BIS_fnc_establishingShot_skipEH"];
-				uiNamespace setVariable ["BIS_fnc_establishingShot_skipEH", nil];
+		if (_this # 1 == 57) then {
+			(findDisplay 46) displayRemoveEventHandler ["KeyDown", uiNamespace getVariable "BIS_fnc_establishingShot_skipEH"];
+			uiNamespace setVariable ["BIS_fnc_establishingShot_skipEH", nil];
 
+			playSound ["click", true];
+
+			BIS_fnc_establishingShot_skip = true;
+		} else {
+			if (_this # 1 == 0x31) then { // N
+				d_cur_fake_uav_timode = d_cur_fake_uav_timode + 1;
+				if (d_cur_fake_uav_timode > 7) then {d_cur_fake_uav_timode = -1};
 				playSound ["click", true];
-
-				BIS_fnc_establishingShot_skip = true;
-			} else {
-				if (_this # 1 == 0x31) then { // N
-					d_cur_fake_uav_timode = d_cur_fake_uav_timode + 1;
-					if (d_cur_fake_uav_timode > 7) then {d_cur_fake_uav_timode = -1};
-					playSound ["click", true];
-					if (d_cur_fake_uav_timode > -1) then {
-						true setCamUseTi d_cur_fake_uav_timode;
-					} else {
-						false setCamUseTi 0;
-					};
-					disableSerialization;
-					((uiNamespace getVariable "d_sat_timode") displayCtrl 50) ctrlSetText (["Off","WHOT","BHOT","HOT","HOT","RBHOT","BRHOT","WHOT","THERMAL"] select (d_cur_fake_uav_timode + 1));
+				if (d_cur_fake_uav_timode > -1) then {
+					true setCamUseTi d_cur_fake_uav_timode;
+				} else {
+					false setCamUseTi 0;
 				};
+				disableSerialization;
+				((uiNamespace getVariable "d_sat_timode") displayCtrl 50) ctrlSetText (["Off","WHOT","BHOT","HOT","HOT","RBHOT","BRHOT","WHOT","THERMAL"] select (d_cur_fake_uav_timode + 1));
 			};
+		};
 
-			(_this # 1 != 1);
-		}];
+		(_this # 1 != 1);
+	}];
 
 	uiNamespace setVariable ["BIS_fnc_establishingShot_skipEH", _skipEH];
 
@@ -252,7 +251,11 @@ if (isNil "BIS_fnc_establishingShot_skip") then {
 	sleep 1;
 	__TRACE("After sleep 1")
 	if (isNil "BIS_fnc_establishingShot_skip" && {d_player_canu}) then {
+#ifndef __VN__
 		enableEnvironment [false, true];
+#else
+		enableEnvironment [true, true];
+#endif
 		2 fadeSound 1;
 
 		// Static fade-in
@@ -488,8 +491,12 @@ if (_mode == 0) then {
 	{
 		_x cutText ["", "PLAIN"];
 	} forEach ["BIS_layerEstShot", "BIS_layerStatic", "BIS_layerInterlacing"];
-
+	
+#ifndef __VN__
 	enableEnvironment [false, true];
+#else
+	enableEnvironment [true, true];
+#endif
 	"BIS_fnc_blackOut" cutText ["", "BLACK FADED", 10e10];
 
 	sleep 1;

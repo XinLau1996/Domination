@@ -1,10 +1,10 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_mtrestkilled1.sqf"
 #include "..\x_setup.sqf"
 
 d_mt_mobile_hq_down = true;
 private _mt_done = (_this # 0) getVariable ["d_mt_done", false];
+__TRACE_1("","_mt_done")
 if (!_mt_done) then {
 #ifndef __TT__
 	[53] call d_fnc_DoKBMsg;

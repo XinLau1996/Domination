@@ -1,5 +1,4 @@
 // by Xeno
-#define THIS_FILE "fn_sideconvoy.sqf"
 #include "..\..\x_setup.sqf"
 
 if (!isServer) exitWith {};
@@ -57,8 +56,6 @@ _newgroup allowFleeing 0;
 _newgroup setCombatMode "GREEN";
 _newgroup setFormation "COLUMN";
 _newgroup setSpeedMode "LIMITED";
-
-_newgroup deleteGroupWhenEmpty true;
 
 private _wp =_newgroup addWaypoint[_pos_start, 0];
 _wp setWaypointBehaviour "SAFE";

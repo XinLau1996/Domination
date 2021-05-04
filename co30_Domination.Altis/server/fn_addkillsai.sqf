@@ -1,12 +1,8 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_addkillsai.sqf"
 #include "..\x_setup.sqf"
 
 params ["_p", "_killer", "_insti"];
-
-if (isNull _insti) then {_insti = UAVControl vehicle _killer # 0}; // UAV/UGV player operated road kill
-if (isNull _insti) then {_insti = _killer}; // player driven vehicle road kill
 
 if (isNull _insti) exitWith {};
 

@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "x_m11.sqf"
 #include "..\..\x_setup.sqf"
 
 d_x_sm_pos = "d_sm_11" call d_fnc_smmapos; // Find and eliminate Nib Nedal in the west mountains
@@ -17,7 +16,6 @@ if (isServer) then {
 	private _ogroup = [d_side_enemy] call d_fnc_creategroup;
 	private _sm_vec = _ogroup createUnit [d_soldier_officer, _newpos, [], 0, "NONE"];
 	[_sm_vec] joinSilent _ogroup;
-	_ogroup deleteGroupWhenEmpty true;
 	_newpos set [2, 0];
 	[_sm_vec, _newpos] call d_fnc_setposagls;
 	_sm_vec call d_fnc_removenvgoggles_fak;

@@ -1,6 +1,5 @@
 // by Xeno (modified by Longtime)
 //#define __DEBUG__
-#define THIS_FILE "fn_event_sideprisoners.sqf"
 #include "..\..\x_setup.sqf"
 
 // Rescue captive friendly soldiers guarded by specops.  If the specops are injured they will kill the hostages.
@@ -62,8 +61,6 @@ _pilot1 disableAI "RADIOPROTOCOL";
 _pilot1 forceSpeed 0;
 (leader _prisonerGroup) setSkill 1;
 _prisonerGroup allowFleeing 0;
-_prisonerGroup deleteGroupWhenEmpty true;
-
 
 if (d_with_dynsim == 0) then {
 	[_prisonerGroup] spawn d_fnc_enabledynsim;
@@ -113,11 +110,9 @@ if (!isNil "_bldg") then {
 } forEach _unitsNotGarrisoned;
 
 private _all_dead = false;
-private _isExecutePrisoners = false;
 private _is_rescued = false;
 
-// this correct?
-while {sleep 1; !d_mt_done; !_is_rescued} do {
+while {sleep 3.14; !d_mt_done; !_is_rescued} do {
 	if (!alive _pilot1) exitWith { _all_dead = true };
 	
 	if (({alive _x} count units _enemyGuardGroup) > 0) then {
@@ -154,8 +149,6 @@ while {sleep 1; !d_mt_done; !_is_rescued} do {
 			// todo announce player
 		};
 	};
-	
-	sleep 3.14;
 };
 
 if (_all_dead) then {

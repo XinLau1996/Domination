@@ -368,6 +368,11 @@ class cfgFunctions {
 			addc(LowGear_Init);
 			addc(LowGearOn);
 			addc(seapatrol);
+			addc(rscdisplaydynamicgroups);
+			addc(dynamicgroups);
+			addc(dgkup);
+			addc(dgkdown);
+			addc(dgefmeh);
 		};
 		class Dom_cba_Scripts {
 			file = "cba";
@@ -443,6 +448,7 @@ class cfgFunctions {
 			addc(event_rabbitrescue);
 			addc(event_markedfordeath);
 			addc(event_sidevipdefend);
+			addc(event_sideprisonerdefuse);
 		};
 		class Dom_Server {
 			file = "server";
@@ -632,6 +638,7 @@ class cfgFunctions {
 			addc(makenewtower);
 			addc(garrisonUnits);
 			addc(deleteempty);
+			addc(utowerkilled);
 		};
 		class Dom_PrePostInit {
 			file = "init";

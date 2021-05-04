@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "i_weapons_default.sqf"
 #include "x_setup.sqf"
 
 // Could be better
@@ -452,4 +451,4 @@ if (!d_tt_ver) then {
 	};
 };
 
-#include "i_weapons_base.sqf";
+#include "i_weapons_base.sqf"

@@ -1,6 +1,5 @@
 // by Longtime
 //#define __DEBUG__
-#define THIS_FILE "fn_event_rabbitrescue.sqf"
 #include "..\..\x_setup.sqf"
 
 #ifdef __TT__
@@ -38,7 +37,6 @@ private _rabbitgroup = [independent] call d_fnc_creategroup;
 //private _rabbit = _rabbitgroup createUnit ["Rabbit_F", _target_center, [], 0, "NONE"];
 private _rabbit = createAgent ["Rabbit_F", _target_center, [], 5, "NONE"];
 [_rabbit, 30] call d_fnc_nodamoffdyn;
-_rabbitgroup deleteGroupWhenEmpty true;
 
 _rabbitgroup setCombatMode "RED";
 _rabbitgroup setSpeedMode "FULL";

@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_airai.sqf"
 #include "..\x_setup.sqf"
 
 __TRACE("airai")
@@ -150,7 +149,6 @@ while {true} do {
 		__TRACE_1("","_vec")
 		sleep 0.1;
 	};
-	_grp deleteGroupWhenEmpty true;
 
 	(leader _grp) setSkill _grpskill;
 

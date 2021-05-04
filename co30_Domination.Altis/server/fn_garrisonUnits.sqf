@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_garrisonUnits.sqf"
 #include "..\x_setup.sqf"
 
 params ["_centerPos", "_numUnits", "_fillRadius", "_fillRoof", "_fillEvenly", "_fillTopDown", "_disableTeleport", "_unitMovementMode"];
@@ -39,7 +38,6 @@ if (_unitMovementMode == 2) then {
 		_x setUnitPos "UP";
 	} forEach _units_to_garrison;
 };
-_newgroup deleteGroupWhenEmpty true;
 sleep 0.2;
 //_newgroup allowFleeing 0;
 //_newgroup setVariable ["d_defend", true];

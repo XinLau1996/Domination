@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "x_m13.sqf"
 #include "..\..\x_setup.sqf"
 
 d_x_sm_pos = [[1079.37,10382.9,0], [1077.04,10420.4,0]]; // index: 13,   Prime Minister,Lopatino
@@ -25,7 +24,6 @@ if (isServer) then {
 	private _newgroup = [d_side_enemy] call d_fnc_creategroup;
 	_sm_vec = _newgroup createUnit [d_functionary, _poss, [], 0, "NONE"];
 	[_sm_vec] joinSilent _newgroup;
-	_newgroup deleteGroupWhenEmpty true;
 	_sm_vec call d_fnc_removenvgoggles_fak;
 	_sm_vec call d_fnc_addkillednormal;
 	d_x_sm_rem_ar pushBack _sm_vec;

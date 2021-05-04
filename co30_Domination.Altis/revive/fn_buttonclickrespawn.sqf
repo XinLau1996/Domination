@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_buttonclickrespawn.sqf"
 #include "..\x_macros.sqf"
 
 if (!hasInterface) exitWith {};
@@ -124,6 +123,9 @@ if (!isNull _mhqobj) then {
 		} else {
 			if (d_beam_target == "D_BASE_D") then {
 				player setVehiclePosition [_respawn_pos, [], 2, "NONE"];
+				_respawn_pos = getPosWorld player;
+				_respawn_pos set [2, 0];
+				player setPos _respawn_pos;
 			} else {
 				player setVehiclePosition [_respawn_pos, [], 0, "NONE"];
 			};

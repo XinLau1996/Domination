@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_tkkickcheck.sqf"
 #include "..\x_setup.sqf"
 
 private _tk = _this # 2;
@@ -19,3 +18,4 @@ if (_p isNotEqualTo []) then {
 		[20, _pna, _numtk, _tk] remoteExecCall ["d_fnc_csidechat", [0, -2] select isDedicated];
 	};
 };
+

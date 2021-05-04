@@ -1,9 +1,8 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_drag.sqf"
 #include "..\x_macros.sqf"
 
-#include "\A3\ui_f\hpp\defineDIKCodes.inc"
+#include "..\defineDIKCodes.inc"
 
 private _dragee = player getVariable "xr_cursorTarget";
 

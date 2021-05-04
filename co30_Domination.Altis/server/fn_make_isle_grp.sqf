@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_make_isle_grp.sqf"
 #include "..\x_setup.sqf"
 
 __TRACE("Starting _make_isle_grp")
@@ -46,7 +45,6 @@ private _firstdone = false;
 } forEach _var;
 // TODO if tanks show better driving behaviour change it back to mixed list?
 //} forEach ([d_enemy_side_short] call d_fnc_getmixedlist);
-_agrp deleteGroupWhenEmpty true;
 sleep 0.31;
 
 _agrp setVariable ["d_PATR", true];

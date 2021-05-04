@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "x_m19.sqf"
 #include "..\..\x_setup.sqf"
 
 d_x_sm_pos = [[10131.6,8377.25,0], [10115.8,8420.6,0]]; // index: 19,   Prime minister of Tadistan in Pesto
@@ -12,7 +11,6 @@ if (hasInterface) then {
 };
 
 if (isServer) then {
-	private _poss = d_x_sm_p
 	d_x_sm_pos params ["_poss"];
 	["aa", 1, "tracked_apc", 1, "tank", 1, d_x_sm_pos # 1, 1, 130, true] spawn d_fnc_CreateArmor;
 	sleep 2.123;

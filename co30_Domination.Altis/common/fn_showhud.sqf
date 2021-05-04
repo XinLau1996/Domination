@@ -1,6 +1,5 @@
 // by Longtime
 //#define __DEBUG__
-#define THIS_FILE "fn_showhud.sqf"
 #include "..\x_setup.sqf"
 
 //hud: Boolean - show scripted HUD (same as normal showHUD true/false)
@@ -13,9 +12,9 @@
 //cursors: Boolean - show HUD weapon cursors (connected with scripted HUD)
 //panels: Boolean - show vehicle panels
 //kills: Boolean - show "x killed by y" systemChat messages
-// TODO in 2.03: showIcon3D: Boolean - (Since Arma 3 v2.03.147265) show icons drawn with drawIcon3D even when the HUD is hidden. System default: false
+//showIcon3D: Boolean (optional, default false) - Show icons drawn with drawIcon3D even when the HUD is hidden
 
 showChat false;
 enableSentences false;
 showSubtitles false;
-showHUD [true, true, true, true, true, true, false, true, true, false];
+showHUD [true, true, true, true, true, true, false, true, true, false, true];

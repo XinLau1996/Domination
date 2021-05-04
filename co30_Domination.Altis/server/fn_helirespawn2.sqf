@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_helirespawn2.sqf"
 #include "..\x_setup.sqf"
 
 __TRACE("Start")
@@ -151,6 +150,7 @@ while {true} do {
 			if (isNil "_aslpos") then {
 				_vec allowDamage true;
 			};
+			_vec setDamage 0;
 		};
 		sleep (20 + random 10);
 	} forEach d_helirespawn2_ar;

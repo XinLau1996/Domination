@@ -1,33 +1,9 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_preinit.sqf"
 #include "..\x_setup.sqf"
 #include "..\x_dbsetup.sqf"
 diag_log format ["############################# %1 %2 #############################", missionName, missionNameSource];
 diag_log [diag_frameno, diag_ticktime, time, "Executing Dom fn_preinit.sqf"];
-
-#ifndef __DOMCFGFUNCTIONS__
-diag_log "Dom precompiling functions!!!";
-private ["_tag", "_file", "_type", "_name", "_fncname"];
-{
-	// currently no check for type (aka client or server, etc)
-	_tag = getText(_x>>"tag");
-	{
-		_file = getText(_x>>"file");
-		_type = getNumber(_x>>"type");
-		{
-			_name = configName _x;
-			_fncname = format ["%1_fnc_%2", _tag, _name];
-			if (!isNil {missionNamespace getVariable _fncname}) exitWith {
-				diag_log "I think you are a cheater....";
-				endMission "LOSER";
-				forceEnd;
-			};
-			missionNamespace setVariable [_fncname, compileScript [format ["%1\fn_%2.sqf", _file, _name], true]];
-		} forEach ("true" configClasses _x);
-	} forEach ("true" configClasses _x);
-} forEach ("true" configClasses (missionConfigFile>>"cfgDomFuncs"));
-#endif
 
 #ifndef __TT__
 d_tt_ver = false;
@@ -105,6 +81,12 @@ d_unsung = false;
 d_csla = true;
 #else
 d_csla = false;
+#endif
+
+#ifdef __VN__
+d_vn = true;
+#else
+d_vn = false;
 #endif
 
 d_HeliHEmpty = "Land_HelipadEmpty_F";
@@ -189,7 +171,6 @@ d_e_marker_color_alpha = 0.8;
 #ifdef __IFA3LITE__
 #include "sm_bonus_vec_ar_ifa3.sqf"
 #endif
-
 #ifdef __GMCWG__
 #include "sm_bonus_vec_ar_gmcwg.sqf"
 #endif
@@ -222,6 +203,9 @@ d_e_marker_color_alpha = 0.8;
 #endif
 #ifdef __CSLA__
 //#include "sm_bonus_vec_ar_csla.sqf"
+#endif
+#ifdef __VN__
+#include "sm_bonus_vec_ar_vn.sqf"
 #endif
 
 #ifdef __ALTIS__
@@ -272,6 +256,9 @@ d_e_marker_color_alpha = 0.8;
 #ifdef __CSLA__
 //#include "mt_bonus_vec_ar_csla.sqf"
 #endif
+#ifdef __VN__
+#include "mt_bonus_vec_ar_vn.sqf"
+#endif
 
 #ifndef __TT__
 d_sm_b_vec_ar_c = d_sm_bonus_vehicle_array apply {toLowerANSI _x};
@@ -305,6 +292,9 @@ d_x_drop_array =
 		if (d_unsung) exitWith {
 			[[], [localize "STR_DOM_MISSIONSTRING_22", "uns_willys_2"], [localize "STR_DOM_MISSIONSTRING_20", "Box_NATO_Ammo_F"]]
 		};
+		if (d_vn) exitWith {
+			[[], [localize "STR_DOM_MISSIONSTRING_22", ""], [localize "STR_DOM_MISSIONSTRING_20", ""]]
+		};
 		[[], [localize "STR_DOM_MISSIONSTRING_22", ["B_MRAP_01_F", "B_T_LSV_01_unarmed_F"] select (d_tanoa || {d_livonia})], [localize "STR_DOM_MISSIONSTRING_20", "Box_NATO_Ammo_F"]]
 	};
 #endif
@@ -333,7 +323,11 @@ d_jumpflag_vec = "";
 
 d_servicepoint_building = "Land_Cargo_House_V2_F";
 
+#ifndef __VN__
 d_illum_tower = "Land_TTowerBig_2_F";
+#else
+d_illum_tower = "Land_vn_ttowerbig_2_f";
+#endif
 d_cargotower =
 #ifdef __ALTIS__
 	"Land_Cargo_Tower_V3_F";
@@ -372,6 +366,9 @@ d_cargotower =
 	"";
 #endif
 #ifdef __CSLA__
+	"";
+#endif
+#ifdef __VN__
 	"";
 #endif
 
@@ -415,8 +412,15 @@ d_wcamp =
 #ifdef __CSLA__
 	"Land_Cargo_Patrol_V4_F";
 #endif
+#ifdef __VN__
+	"Land_vn_strazni_vez";
+#endif
 
+#ifndef __VN__
 d_mash = "Land_FirstAidKit_01_closed_F";
+#else
+d_mash = "Land_vn_tent_mash_01_01";
+#endif
 
 d_dropped_box_marker = "mil_marker";
 
@@ -464,7 +468,11 @@ d_objectID2 = objNull;
 // no farps in A3 so we fake them
 // first entry should always be a helipad because the trigger which is needed to make it work is spawned there
 // second object is also needed, remove action gets added on the second object
+#ifndef __VN__
 d_farp_classes = ["Land_HelipadSquare_F", "Land_Cargo40_military_green_F"];
+#else
+d_farp_classes = ["Land_HelipadSquare_F", "vn_us_komex_medium_01"];
+#endif
 
 // artillery operators
 #ifndef __TT__
@@ -513,26 +521,6 @@ d_color_m_marker =
 #ifdef __TT__
 	"ColorGUER";
 #endif
-
-#ifdef __TT__
-if (isNil "d_tt_points") then {
-	d_tt_points = [
-		30, // points for the main target winner team
-		7, // points if draw (main target)
-		15, // points for destroying main target radio tower
-		5, // points for main target mission
-		10, // points for sidemission
-		5, // points for capturing a camp (main target)
-		10, // points that get subtracted when loosing a mt camp again
-		4, // points for destroying a vehicle of the other team
-		2 // points for killing a member of the other team
-	];
-};
-#endif
-
-if (isNil "d_cas_available_time") then {
-	d_cas_available_time = 600; // time till CAS is available again!
-};
 
 d_non_steer_para = "NonSteerable_Parachute_F";
 
@@ -838,10 +826,14 @@ if (!d_gmcwgwinter) then {
 #ifdef __TTMALDEN__
 #include "d_allmen_O_default.sqf"
 #endif
+#ifdef __VN__
+#include "d_allmen_O_vn.sqf"
+#endif
 #ifdef __UNSUNG__
 #include "d_allmen_O_uns.sqf"
 #endif
 	];
+	
 	call {
 		if (d_ifa3lite) exitWith {
 			d_allmen_W = [
@@ -872,7 +864,45 @@ if (!d_gmcwgwinter) then {
 #endif
 
 	d_allmen_G = [
-		#include "d_allmen_G_default.sqf"
+#ifdef __ALTIS__
+#include "d_allmen_G_default.sqf"
+#endif
+#ifdef __LIVONIA__
+#include "d_allmen_G_default.sqf"
+#endif
+#ifdef __GMCWG__
+#include "d_allmen_G_default.sqf"
+#endif
+#ifdef __CUP_CHERNARUS__
+#include "d_allmen_G_default.sqf"
+#endif
+#ifdef __CUP_TAKISTAN__
+#include "d_allmen_G_default.sqf"
+#endif
+#ifdef __CUP_SARA__
+#include "d_allmen_G_default.sqf"
+#endif
+#ifdef __IFA3LITE__
+#include "d_allmen_G_default.sqf"
+#endif
+#ifdef __TTTANOA__
+#include "d_allmen_G_default.sqf"
+#endif
+#ifdef __TANOA__
+#include "d_allmen_G_default.sqf"
+#endif
+#ifdef __STRATIS__
+#include "d_allmen_G_default.sqf"
+#endif
+#ifdef __TTMALDEN__
+#include "d_allmen_G_default.sqf"
+#endif
+#ifdef __UNSUNG__
+#include "d_allmen_G_default.sqf"
+#endif
+#ifdef __VN__
+#include "d_allmen_G_vn.sqf"
+#endif
 	];
 
 	d_specops_E = [
@@ -921,6 +951,9 @@ if (!d_gmcwgwinter) then {
 #endif
 #ifdef __UNSUNG__
 #include "d_specops_O_uns.sqf"
+#endif
+#ifdef __VN__
+#include "d_specops_O_vn.sqf"
 #endif
 	];
 
@@ -1011,7 +1044,16 @@ if (!d_gmcwgwinter) then {
 	d_sniper_E = [["uns_men_VC_mainforce_Rmrk", "uns_men_VC_mainforce_Roff"]];
 	d_sabotage_E = [["uns_men_VC_mainforce_68_Roff","uns_men_VC_mainforce_68_Ra1", "uns_men_VC_mainforce_68_Ra2", "uns_men_VC_mainforce_68_Rmg"]];
 #endif
-
+#ifdef __VN__
+	d_sniper_E = [["vn_o_men_nva_10", "vn_o_men_nva_24"], ["vn_o_men_vc_local_31", "vn_o_men_vc_local_10"]];
+	d_sabotage_E = [["vn_o_men_nva_09","vn_o_men_nva_23"]];
+	d_sabotage_G = [["vn_i_men_ranger_05"], ["vn_i_men_sf_05"]];
+	d_specops_G = [
+		["Indep","VN_ARVN","vn_i_group_men_sf","vn_i_group_men_sf_01"] call d_fnc_GetConfigGroup,
+		["Indep","VN_ARVN","vn_i_group_men_sf","vn_i_group_men_sf_02"] call d_fnc_GetConfigGroup,
+		["Indep","VN_ARVN","vn_i_group_men_sf","vn_i_group_men_sf_03"] call d_fnc_GetConfigGroup
+	];
+#endif
 
 	d_veh_a_E = [
 #ifdef __ALTIS__
@@ -1055,6 +1097,9 @@ if (!d_gmcwgwinter) then {
 #endif
 #ifdef __UNSUNG__
 #include "d_veh_a_O_uns.sqf"
+#endif
+#ifdef __VN__
+#include "d_veh_a_O_vn.sqf"
 #endif
 	];
 
@@ -1127,6 +1172,9 @@ if (!d_gmcwgwinter) then {
 #ifdef __UNSUNG__
 	d_arti_observer_E = [["uns_men_VC_mainforce_68_RTO"]];
 #endif
+#ifdef __VN__
+	d_arti_observer_E = [["vn_o_men_nva_01","vn_o_men_nva_65_01"]];
+#endif
 	d_arti_observer_G = [["I_Soldier_TL_F"]];
 
 	if (isNil "d_number_attack_planes") then {
@@ -1169,6 +1217,9 @@ if (!d_gmcwgwinter) then {
 			};
 			if (d_unsung) exitWith {
 				"uns_C130_H"
+			};
+			if (d_vn) exitWith {
+				""
 			};
 			if (d_ifa3lite) exitWith {
 				""
@@ -1220,6 +1271,9 @@ if (!d_gmcwgwinter) then {
 			if (d_rhs) exitWith {
 				"RHS_A10"
 			};
+			if (d_vn) exitWith {
+				""
+			};
 			"B_Plane_CAS_01_F"
 		};
 #endif
@@ -1269,6 +1323,9 @@ if (!d_gmcwgwinter) then {
 			if (d_rhs) exitWith {
 				"RHS_Su25SM_vvsc"
 			};
+			if (d_vn) exitWith {
+				""
+			};
 			"O_Plane_CAS_02_F"
 		};
 #endif
@@ -1306,6 +1363,9 @@ if (!d_gmcwgwinter) then {
 					"UNS_ASSAULT_BOAT_VC"
 				};
 				if (d_ifa3lite) exitWith {
+					""
+				};
+				if (d_vn) exitWith {
 					""
 				};
 				"O_Boat_Armed_01_hmg_F"
@@ -1427,7 +1487,7 @@ if (!d_gmcwgwinter) then {
 		if (d_cup) exitWith {
 			"CUP_B_M6LineBacker_USA_W"
 		};
-		if (d_rhs) exitWith	{
+		if (d_rhs) exitWith {
 			"RHS_M6_wd"
 		};
 		if (d_gmcwg) exitWith {
@@ -1436,8 +1496,11 @@ if (!d_gmcwgwinter) then {
 			};
 			"gm_ge_army_gepard1a1"
 		};
-		if (d_unsung) exitWith	{
+		if (d_unsung) exitWith {
 			"uns_m163"
+		};
+		if (d_vn) exitWith {
+			""
 		};
 		if (d_tanoa || {d_livonia}) exitWith {
 			"B_T_APC_Tracked_01_AA_F"
@@ -1471,7 +1534,7 @@ if (!d_gmcwgwinter) then {
 		if (d_cup) exitWith {
 			"CUP_B_M1A1_Woodland_US_Army"
 		};
-		if (d_rhs) exitWith	{
+		if (d_rhs) exitWith {
 			"rhsusf_m1a1aimwd_usarmy"
 		};
 		if (d_gmcwg) exitWith {
@@ -1480,8 +1543,11 @@ if (!d_gmcwgwinter) then {
 			};
 			"gm_ge_army_Leopard1a1a1"
 		};
-		if (d_unsung) exitWith	{
+		if (d_unsung) exitWith {
 			"uns_m48a3"
+		};
+		if (d_vn) exitWith {
+			""
 		};
 		if (d_tanoa || {d_livonia}) exitWith {
 			"B_T_MBT_01_cannon_F"
@@ -1494,7 +1560,7 @@ if (!d_gmcwgwinter) then {
 		if (d_cup) exitWith {
 			"CUP_O_T72_RU"
 		};
-		if (d_rhs) exitWith	{
+		if (d_rhs) exitWith {
 			"rhs_t90_tv"
 		};
 		if (d_ifa3lite) exitWith {
@@ -1515,7 +1581,7 @@ if (!d_gmcwgwinter) then {
 		if (d_cup) exitWith {
 			"CUP_B_M2Bradley_USA_W"
 		};
-		if (d_rhs) exitWith	{
+		if (d_rhs) exitWith {
 			"RHS_M2A2_wd"
 		};
 		if (d_gmcwg) exitWith {
@@ -1524,8 +1590,11 @@ if (!d_gmcwgwinter) then {
 			};
 			"gm_ge_army_m113a1g_apc"
 		};
-		if (d_unsung) exitWith	{
+		if (d_unsung) exitWith {
 			"uns_M113_M2"
+		};
+		if (d_vn) exitWith {
+			""
 		};
 		if (d_tanoa || {d_livonia}) exitWith {
 			"B_T_APC_Wheeled_01_cannon_F"
@@ -1592,6 +1661,9 @@ if (!d_gmcwgwinter) then {
 #ifdef __UNSUNG__
 #include "d_sm_classes_uns.sqf"
 #endif
+#ifdef __VN__
+#include "d_sm_classes_vn.sqf"
+#endif
 #ifdef __CSLA__
 //#include "d_sm_classes_csla.sqf"
 #endif
@@ -1617,6 +1689,11 @@ if (!d_gmcwgwinter) then {
 	
 	call {
 		if (d_enemy_side_short == "E") exitWith {
+			if (d_vn) exitWith {
+				d_air_radar = "Land_vn_radar_small_f";
+				d_air_radar2 = "Land_vn_mobileradar_01_radar_f";
+				d_enemy_hq = "Land_Cargo_HQ_V1_F";
+			};
 			d_air_radar = "Land_Radar_Small_F";
 			d_air_radar2 = "Land_MobileRadar_01_radar_F";
 			d_enemy_hq = "Land_Cargo_HQ_V1_F";
@@ -1646,6 +1723,9 @@ if (!d_gmcwgwinter) then {
 				};
 				if (d_unsung) exitWith {
 					["uns_Mig21_CAS", "uns_Mig21_CBU", "uns_Mig21_HCAS"]
+				};
+				if (d_vn) exitWith {
+					[]
 				};
 				["O_Plane_CAS_02_F"]
 			};
@@ -1681,6 +1761,9 @@ if (!d_gmcwgwinter) then {
 					[]
 				};
 				if (d_unsung) exitWith {
+					[]
+				};
+				if (d_vn) exitWith {
 					[]
 				};
 				if (d_ifa3lite) exitWith {
@@ -1743,6 +1826,9 @@ if (!d_gmcwgwinter) then {
 				};
 				if (d_unsung) exitWith {
 					["uns_Mi8TV_VPAF_MG"]
+				};
+				if (d_vn) exitWith {
+					[]
 				};
 				["O_Heli_Attack_02_F"]
 			};
@@ -1917,6 +2003,14 @@ if (!d_gmcwgwinter) then {
 		["I_Heli_Transport_02_F"]
 	};
 #endif
+#ifdef __VN__
+	// enemy parachute troops transport chopper
+	d_transport_chopper = call {
+		if (d_enemy_side_short == "E") exitWith {
+			["vn_o_air_mi2_01_01"]
+		};
+	};
+#endif
 
 	// light attack chopper (for example I_Heli_light_03_F with MG)
 	d_light_attack_chopper = call {
@@ -1933,6 +2027,9 @@ if (!d_gmcwgwinter) then {
 				};
 				if (d_unsung) exitWith {
 					["uns_Mi8TV_VPAF_MG"]
+				};
+				if (d_vn) exitWith {
+					[]
 				};
 				if (d_ifa3lite) exitWith {
 					[]
@@ -1981,43 +2078,11 @@ if (!d_gmcwgwinter) then {
 	// Needs a building which can be entered by AI (as they will respawn inside)
 	// can only be destroyed by satchel charges!!!
 	// no marker gets created!
+#ifndef __VN__
 	d_barracks_building = "Land_BagBunker_01_large_green_F";
-/*#ifdef __ALTIS__
-		"Land_BagBunker_Large_F";
+#else
+	d_barracks_building = "Land_vn_o_shelter_05";
 #endif
-#ifdef __CUP_CHERNARUS__
-		"Land_BagBunker_01_large_green_F";
-#endif
-#ifdef __CUP_TAKISTAN__
-		"Land_BagBunker_Large_F";
-#endif
-#ifdef __CUP_SARA__
-		"Land_BagBunker_Large_F";
-#endif
-#ifdef __IFA3LITE__
-		"Land_BagBunker_01_large_green_F";
-#endif
-#ifdef __TANOA__
-		"Land_BagBunker_01_large_green_F";
-#endif
-#ifdef __STRATIS__
-		"Land_BagBunker_Large_F";
-#endif
-#ifdef __MALDEN__
-		"Land_BagBunker_Large_F";
-#endif
-#ifdef __LIVONIA__
-		"Land_BagBunker_01_large_green_F";
-#endif
-#ifdef __TT__
-		"Land_BagBunker_Large_F";
-#endif
-#ifdef __GMCWG__
-		"Land_BagBunker_01_large_green_F";
-#endif
-#ifdef __UNSUNG__
-		"Land_BagBunker_01_large_green_F";
-#endif*/
 
 	// same as barracks building. But enemy AI vehicles do not spawn inside the main target area but outside
 	// if destroyed no more enemy vehicles respawn
@@ -2061,6 +2126,9 @@ if (!d_gmcwgwinter) then {
 #ifdef __CSLA__
 		"Land_Cargo_HQ_V4_F";
 #endif
+#ifdef __VN__
+		"Land_vn_wf_vehicle_service_point_east";
+#endif
 
 	d_b_small_static_high =
 #ifdef __ALTIS__
@@ -2101,6 +2169,9 @@ if (!d_gmcwgwinter) then {
 #endif
 #ifdef __CSLA__
 		"Land_BagBunker_01_small_green_F";
+#endif
+#ifdef __VN__
+		"";
 #endif
 
 	if (isNil "d_ai_groups_respawn_time") then {
@@ -2232,6 +2303,9 @@ if (!d_gmcwgwinter) then {
 #ifdef __CSLA__
 		_civVehiclesWeightedRuralLivonia;
 #endif
+#ifdef __VN__
+		_civVehiclesWeightedCityWealthHigh;
+#endif
 
 	//civilian faces
 	private _africanFaces = [
@@ -2346,32 +2420,13 @@ if (!d_gmcwgwinter) then {
 #ifdef __CSLA__
 		_mixedFaces;
 #endif
+#ifdef __VN__
+		_mixedFaces;
+#endif
 };
 
 if (hasInterface) then {
 	__TRACE("preInit hasInterface")
-	// d_reserved_slot gives you the ability to add reserved slots for admins
-	// if you don't log in when you've chosen the slot, you'll get kicked after ~20 once the intro ended
-	// default is no check, example: d_reserved_slot = ["d_artop_1"];
-	if (isNil "d_reserved_slot") then {
-		d_reserved_slot = [];
-	};
-
-	// d_uid_reserved_slots and d_uids_for_reserved_slots gives you the possibility to limit a slot
-	// you have to add the var names of the units to d_uid_reserved_slots and in d_uids_for_reserved_slots the UIDs of valid players
-	// d_uid_reserved_slots = ["d_alpha_1", "d_bravo_3"];
-	// d_uids_for_reserved_slots = ["1234567", "7654321"];
-	if (isNil "d_uid_reserved_slots") then {
-		d_uid_reserved_slots = [];
-		d_uids_for_reserved_slots = [];
-	};
-	
-	if (isNil "d_uids_def_choppers") then {
-		// If d_uids_initial_vecs is filled with player UIDs as strings player UIDs which are not in the array are getting kicked from
-		// the initially placed choppers and MHQs on base
-		// d_uids_initial_vecs = ["1234567", "7654321"];
-		d_uids_def_choppers = [];
-	};
 
 	// this vehicle will be created if you use the "Create XXX" at a mobile respawn (old "Create Motorcycle") or at a jump flag
 	// IMPORTANT !!!! for ranked version !!!!
@@ -2398,6 +2453,9 @@ if (hasInterface) then {
 		if (d_unsung) exitWith {
 			["uns_willys"]
 		};
+		if (d_vn) exitWith {
+			[]
+		};
 		["B_Quadbike_01_F", "B_LSV_01_unarmed_F"]
 	};
 #endif
@@ -2418,10 +2476,6 @@ if (hasInterface) then {
 #ifdef __TT__
 	["O_Quadbike_01_F"];
 #endif
-
-	if (d_weather == 1) then {
-		0 setOvercast 0;
-	};
 
 #ifdef __OWN_SIDE_BLUFOR__
 	d_UAV_Small = "B_UAV_01_F";
@@ -2457,7 +2511,7 @@ if (hasInterface) then {
 	d_check_ammo_load_vecs =
 #ifdef __OWN_SIDE_BLUFOR__
 	["B_Heli_Light_01_F", "B_MRAP_01_F", "B_APC_Tracked_01_CRV_F", "B_T_APC_Tracked_01_CRV_F","CUP_B_M1133_MEV_Woodland","CUP_B_LAV25_HQ_USMC","CUP_B_M1133_MEV_Desert","CUP_B_UH1Y_UNA_USMC","I_Heli_light_03_unarmed_F","RHS_MELB_MH6M","rhsusf_M1232_usarmy_wd","gm_ge_army_m113a1g_command","gm_ge_army_fuchsa0_command","CUP_B_UH1D_GER_KSK","I_E_Heli_light_03_unarmed_F",
-	"uns_M113_transport","uns_UH1H_m60","gm_ge_army_bo105m_vbh"];
+	"uns_M113_transport","uns_UH1H_m60","gm_ge_army_bo105m_vbh", "vn_b_wheeled_m54_03", "vn_b_air_uh1d_02_05"];
 #endif
 #ifdef __OWN_SIDE_OPFOR__
 	call {
@@ -2477,58 +2531,6 @@ if (hasInterface) then {
 	d_check_ammo_load_vecs = d_check_ammo_load_vecs apply {toLowerANSI _x};
 
 	d_weapon_respawn = true;
-
-	// points needed to get a specific rank
-	// gets even used in the unranked versions
-#ifndef __TT__
-	if (isNil "d_points_needed") then {
-		d_points_needed = [
-			20, // Corporal
-			50, // Sergeant
-			90, // Lieutenant
-			140, // Captain
-			200, // Major
-			270, // Colonel
-			500 // General
-		];
-	};
-
-	if (isNil "d_points_needed_db") then {
-		d_points_needed_db = [
-			500, // Corporal
-			2000, // Sergeant
-			5000, // Lieutenant
-			9000, // Captain
-			14000, // Major
-			20000, // Colonel
-			30000 // General
-		];
-	};
-#else
-	if (isNil "d_points_needed") then {
-		d_points_needed = [
-			100, // Corporal
-			400, // Sergeant
-			800, // Lieutenant
-			1600, // Captain
-			3000, // Major
-			5000, // Colonel
-			8000 // General
-		];
-	};
-
-	if (isNil "d_points_needed_db") then {
-		d_points_needed_db = [
-			500, // Corporal
-			2000, // Sergeant
-			5000, // Lieutenant
-			9000, // Captain
-			14000, // Major
-			20000, // Colonel
-			30000 // General
-		];
-	};
-#endif
 
 	d_marker_vecs = [];
 	d_mhq_3ddraw = [];
@@ -2557,54 +2559,6 @@ if (hasInterface) then {
 	// for example: ["pilot_1","pilot_2"];, case sensitiv
 	// PLEASE DO NOT CHANGE THIS FOR THE TT VERSION, IT SHOULD BE AN EMPTY ARRAY!!!!
 	d_only_pilots_can_fly = [];
-
-	// array now so players can select different air taxi types
-	if (d_with_airtaxi == 0) then {
-		d_taxi_aircrafts =
-#ifdef __OWN_SIDE_INDEPENDENT__
-			["I_Heli_Transport_02_F"];
-#endif
-#ifdef __OWN_SIDE_BLUFOR__
-			call {
-				if (d_cup) exitWith {
-					["CUP_B_UH60M_US", "CUP_B_MH6J_USA", "CUP_B_CH47F_USA"]
-				};
-				if (d_gmcwg) exitWith {
-					if (d_gmcwgwinter) exitWith {
-						["gm_ge_army_ch53g_un"]
-					};
-					["gm_ge_army_ch53g"]
-				};
-				if (d_rhs) exitWith {
-					["RHS_UH60M2"]
-				};
-				if (d_unsung) exitWith {
-					["uns_UH1H_m60"]
-				};
-				["B_T_VTOL_01_infantry_F", "B_Heli_Transport_03_unarmed_F", "B_Heli_Light_01_F", "B_Heli_Transport_01_F"]
-			};
-#endif
-#ifdef __OWN_SIDE_OPFOR__
-			call {
-				if (d_rhs) exitWith {
-					["RHS_Mi8mt_Cargo_vv"]
-				};
-				["O_T_VTOL_02_infantry_dynamicLoadout_F"]
-			};
-#endif
-#ifdef __TT__
-			["O_Heli_Light_02_unarmed_F"];
-#endif
-	} else {
-		d_taxi_aircrafts = [];
-	};
-
-	if (isNil "d_launcher_cooldown") then {
-		// player AT launcher cooldown time, means, a player can't use a guided launcher like the Titan for 60
-		// The projectile gets deleted and a magazine added again to the player inventory
-		// can be changed in the database dom_settings table too
-		d_launcher_cooldown = d_launcher_cooldownp;
-	};
 
 	// internal variables
 	d_flag_vec = objNull;
@@ -2713,13 +2667,6 @@ if (hasInterface) then {
 	// if you use CUP then only CUP stuff will be shown in Virtual Arsenal
 	d_arsenal_mod_prestrings = [];
 
-#ifndef __UNSUNG__
-	if (isClass(configFile>>"CfgPatches">>"uns_main")) then {
-		// now Virtual Arsenal will only show Unsung stuff; of course if you add other modes it will show them too
-		d_arsenal_mod_prestrings pushBackUnique "uns_";
-	};
-#endif
-
 	// same as above but will remove specific mods
 	// for example: "gm_" will remove Global Mobilization
 	d_arsenal_mod_remove_strings = [];
@@ -2730,10 +2677,10 @@ if (hasInterface) then {
 		[], // PRIMARYWEAPON
 		[], // SECONDARYWEAPON
 		[], // HANDGUN
-		[{getText (configFile>>"CfgWeapons">>_this>>"ItemInfo">>"containerClass") == "Supply500"}, {d_player_side == blufor && {_this in ["u_o_v_soldier_viper_f", "u_o_v_soldier_viper_hex_f"]}}, {_this select [0, 4] == "u_c_" || {_this select [0, 6] == "u_i_c_"}}, "U_OrestesBody", "U_Marshal", "U_Rangemaster", "U_Competitor", {_this find "paradeuniform" > -1}], // uniforms
+		[{getText (configFile>>"CfgWeapons">>_this>>"ItemInfo">>"containerClass") == "Supply500"}, {d_player_side == blufor && {_this in ["u_o_v_soldier_viper_f", "u_o_v_soldier_viper_hex_f"]}}, {_this select [0, 4] == "u_c_" || {_this select [0, 6] == "u_i_c_"}}, "U_OrestesBody", "U_Marshal", "U_Rangemaster", "U_Competitor", {"paradeuniform" in _this}], // uniforms
 		[{_this isKindOf ["V_DeckCrew_base_F", configFile >> "CfgWeapons"]}, {_this isKindOf ["V_EOD_base_F", configFile >> "CfgWeapons"]}, {_this isKindOf ["V_Safety_base_F", configFile >> "CfgWeapons"]}, "V_Press_F", {_this select [0, 7] == "v_plain"}], // VEST
-		[{_this isKindOf "B_HMG_01_weapon_F"}, {_this isKindOf "B_HMG_01_support_F"}, {_this isKindOf "B_HMG_02_support_F"}, {_this select [1, 15] == "_AA_01_weapon_F"}, {_this select [1, 15] == "_AT_01_weapon_F"}, {getText (configFile>>"CfgVehicles">>_this>>"vehicleclass") == "Respawn"}, {_this find "uav_" != -1 || {_this find "ugv_" != -1}}, {_this select [1, 11] == "_messenger_"}, {_this find "_everyday_" > -1}, {_this find "_sport_" > -1}], // BACKPACK
-		[{d_player_side == blufor && {_this == "H_HelmetO_ViperSP_ghex_F" || {_this == "H_HelmetO_ViperSP_hex_F"}}}, {_this isKindOf ["H_Hat_blue", configFile >> "CfgWeapons"]}, {_this isKindOf ["H_HeadBandage_base_F", configFile >> "CfgWeapons"]}, {_this isKindOf ["H_RacingHelmet_1_F", configFile >> "CfgWeapons"]}, {_this isKindOf ["H_Construction_headset_base_F", configFile >> "CfgWeapons"]}, {_this isKindOf ["H_Construction_earprot_base_F", configFile >> "CfgWeapons"]}, {_this isKindOf ["H_Construction_basic_base_F", configFile >> "CfgWeapons"]}, {_this find "paradedresscap" > -1}], // HEADGEAR
+		[{_this isKindOf "B_HMG_01_weapon_F"}, {_this isKindOf "B_HMG_01_support_F"}, {_this isKindOf "B_HMG_02_support_F"}, {_this select [1, 15] == "_AA_01_weapon_F"}, {_this select [1, 15] == "_AT_01_weapon_F"}, {getText (configFile>>"CfgVehicles">>_this>>"vehicleclass") == "Respawn"}, {"uav_" in _this || {"ugv_" in _this}}, {_this select [1, 11] == "_messenger_"}, {"_everyday_" in _this}, {"_sport_" in _this}], // BACKPACK
+		[{d_player_side == blufor && {_this == "H_HelmetO_ViperSP_ghex_F" || {_this == "H_HelmetO_ViperSP_hex_F"}}}, {_this isKindOf ["H_Hat_blue", configFile >> "CfgWeapons"]}, {_this isKindOf ["H_HeadBandage_base_F", configFile >> "CfgWeapons"]}, {_this isKindOf ["H_RacingHelmet_1_F", configFile >> "CfgWeapons"]}, {_this isKindOf ["H_Construction_headset_base_F", configFile >> "CfgWeapons"]}, {_this isKindOf ["H_Construction_earprot_base_F", configFile >> "CfgWeapons"]}, {_this isKindOf ["H_Construction_basic_base_F", configFile >> "CfgWeapons"]}, {"paradedresscap" in _this}], // HEADGEAR
 		[], // GOGGLES
 		[], // NVGS
 		[], // BINOCULARS
@@ -2765,10 +2712,40 @@ if (hasInterface) then {
 	(d_remove_from_arsenal # 0) pushBack "gm_c7a1_blk";
 	(d_remove_from_arsenal # 0) pushBack "gm_gvm95_blk";
 #endif
+#ifdef __VN__
+	(d_remove_from_arsenal # 5) append [{"_static_" in _this}, "vn_c_pack_01", "vn_c_pack_02"];
+#endif
 
-	if (d_no_mortar_ar == 1) then {
-		(d_remove_from_arsenal # 5) append [{_this isKindOf "Weapon_Bag_Base" || {_this isKindOf "B_Mortar_01_support_F"}}];
-	};
+	// add here the class names of the weapons which you want to add to Virtual Arsenal
+	d_add_to_arsenal = [
+		[], // PRIMARYWEAPON
+		[], // SECONDARYWEAPON
+		[], // HANDGUN
+		[], // uniforms
+		[], // VEST
+		[], // BACKPACK
+		[], // HEADGEAR
+		[], // GOGGLES
+		[], // NVGS
+		[], // BINOCULARS
+		[], // MAP
+		[], // GPS, UAV Terminal
+		[], // RADIO
+		[], // COMPASS
+		[], // WATCH
+		[], // FACE
+		[], // VOICE
+		[], // INSIGNIA
+		[], // ITEMOPTIC
+		[], // ITEMACC
+		[], // ITEMMUZZLE
+		[], // CARGOMAG
+		[], // CARGOTHROW
+		[], // CARGOPUT
+		[], // CARGOMISC
+		[], // ITEMBIPOD
+		[] // CARGOMAGALL
+	];
 
 	d_color_hash = createHashMap;
 

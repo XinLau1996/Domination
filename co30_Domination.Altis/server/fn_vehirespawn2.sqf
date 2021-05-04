@@ -1,5 +1,4 @@
 // by Xeno
-#define THIS_FILE "fn_vehirespawn2.sqf"
 #include "..\x_setup.sqf"
 
 if (!isServer) exitWith{};
@@ -91,5 +90,6 @@ while {true} do {
 		if (_vec isKindOf "Boat_F") then {
 			_vec remoteExecCall ["d_fnc_addpushaction", [0, -2] select isDedicated];
 		};
+		_vec setDamage 0;
 	};
 };

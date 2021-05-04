@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "i_weapons_gmcwg.sqf"
 #include "x_setup.sqf"
 
 // please note that in the non ranked version all weapons and items are available, no matter which rank the player has
@@ -387,4 +386,4 @@ if (!d_tt_ver) then {
 	};
 };
 
-#include "i_weapons_base.sqf";
+#include "i_weapons_base.sqf"

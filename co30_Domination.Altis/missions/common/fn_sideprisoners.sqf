@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_sideprisoners.sqf"
 #include "..\..\x_setup.sqf"
 
 if !(isServer) exitWith {};
@@ -26,7 +25,6 @@ private _units = [_pos, call d_fnc_getunitlistc, _newgroup, false, false] call d
 private _leader = leader _newgroup;
 _leader setSkill 1;
 _newgroup allowFleeing 0;
-_newgroup deleteGroupWhenEmpty true;
 
 d_x_sm_rem_ar append _units;
 

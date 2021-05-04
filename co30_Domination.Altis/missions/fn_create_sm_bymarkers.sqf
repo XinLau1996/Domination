@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_create_sm_bymarkers.sqf"
 #include "..\x_setup.sqf"
 
 // example, number must be unique (d_smm|uniqe number|), otherwise it will overwrite the previous entry
@@ -53,6 +52,7 @@
 // d_smm|670|cache
 // d_smm|671|trucks
 // d_smm|701|gleak
+// d_smm|801|scud
 
 d_sm_hash = createHashMap;
 
@@ -61,7 +61,7 @@ private _dallsidemissions = [];
 private _smtypes = ["convoy", "stealflag", "tankdepot", "arrest", "artibase", "deliver", "evac", "radiotower", "prisoners",
 	"stealapc", "stealchopper", "stealtank", "stealplane", "specops", "eliminateofficer", "eliminategovmember", "fuelstation",
 	"transformer", "barracks", "hangar", "eliminatesniper", "cargotruck", "minesland", "minesnaval", "dataterminal", "device",
-	"sam", "cache", "trucks", "artycannon", "gleak", "farp"] apply {toLowerANSI _x};
+	"sam", "cache", "trucks", "artycannon", "gleak", "farp", "scud"] apply {toLowerANSI _x};
 private _subtypes = ["start", "end", "flag", "tank", "time", "radius"] apply {toLowerANSI _x};
 
 private _infhelper_fnc = {
@@ -602,6 +602,21 @@ __TRACE_1("","_eee")
 					if (hasInterface && {_onesmar # 5 == ""}) then {
 						_onesmar set [5, "2029"];
 						_onesmar set [6, "2030"];
+					};
+				};
+			};
+		};
+		
+		if (_smtype == "scud") exitWith {
+			call {
+				if (_subtype == "") exitWith {
+					if ((_onesmar # 2) isEqualTo []) then {
+						(_onesmar # 2) pushBack (markerPos _curmar);
+						_onesmar set [7, markerDir _curmar];
+					};
+					if (hasInterface && {_onesmar # 5 == ""}) then {
+						_onesmar set [5, "2075"];
+						_onesmar set [6, "2076"];
 					};
 				};
 			};

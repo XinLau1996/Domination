@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "fn_vehirespawn.sqf"
 #include "..\x_setup.sqf"
 
 if (!isServer) exitWith{};
@@ -236,5 +235,6 @@ while {true} do {
 		if (d_with_ranked) then {
 			clearWeaponCargoGlobal _vec;
 		};
+		_vec setDamage 0;
 	};
 };

@@ -1,6 +1,5 @@
 // by Xeno
-#define __DEBUG__
-#define THIS_FILE "fn_hascopilot.sqf"
+//#define __DEBUG__
 #include "..\x_setup.sqf"
 
 params ["_vec"];

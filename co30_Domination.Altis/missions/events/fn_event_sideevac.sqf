@@ -1,6 +1,5 @@
 // by Xeno (modified by Longtime)
 //#define __DEBUG__
-#define THIS_FILE "fn_event_sideevac.sqf"
 #include "..\..\x_setup.sqf"
 
 #ifdef __TT__
@@ -131,9 +130,6 @@ _pilot1 disableAI "PATH";
 _pilot1 setDamage 0.5;
 _pilot2 disableAI "PATH";
 _pilot2 setDamage 0.5;
-
-_owngroup1 deleteGroupWhenEmpty true;
-_owngroup2 deleteGroupWhenEmpty true;
 
 if (d_with_dynsim == 0) then {
 	[_owngroup1] spawn d_fnc_enabledynsim;

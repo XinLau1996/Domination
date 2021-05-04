@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "missionssetup.sqf"
 #include "..\x_setup.sqf"
 
 // I'm using x_mXX.sqf for the mission filename where XX (index number) has to be added to d_sm_array
@@ -104,6 +103,9 @@ d_sm_array =
 d_sm_array = [];
 #endif
 #ifdef __CSLA__
+d_sm_array = [];
+#endif
+#ifdef __VN__
 d_sm_array = [];
 #endif
 
@@ -280,6 +282,9 @@ d_sm_folder = "mifa3";
 d_sm_folder = "ma3a";
 #endif
 #ifdef __CSLA__
+d_sm_folder = "ma3a";
+#endif
+#ifdef __VN__
 d_sm_folder = "ma3a";
 #endif
 

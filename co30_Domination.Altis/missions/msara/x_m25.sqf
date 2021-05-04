@@ -1,6 +1,5 @@
 // by Xeno
 //#define __DEBUG__
-#define THIS_FILE "x_m25.sqf"
 #include "..\..\x_setup.sqf"
 
 d_x_sm_pos = [[4726.85,15689,0],[4385.75,15825.4,0],[4415.64,15790.9,0],[4375.74,15790.8,0],[4392.87,15521.3,0],[4532.88,15304.8,0],[4585.08,15287.2,0],[4978.4,15466.1,0],[4855.92,15535.1,0],[4930.69,15514.1,0],[4956.34,15760.8,0],[4949.85,15827.9,0],[4964.33,16067,0],[4987.25,15717.1,0],[4395.8,15350.6,0],   [4574.74,15374.2,0],[4368.82,15737,0],[5044.83,15799.3,0],[4860.15,15679.2,0]]; // index: 25,   enemy officer on Isla del Vasal or Isla del Vida
@@ -12,7 +11,7 @@ if (hasInterface) then {
 };
 
 if (isServer) then {
-	d_x_sm_pos _poss = x_sm_pos # ((floor random 14) + 1);
+	private _poss = d_x_sm_pos # ((floor random 14) + 1);
 	//private _fortress = createVehicle [d_sm_fortress, _poss, [], 0, "NONE"];
 	//_fortress setPos _poss;
 	//d_x_sm_vec_rem_ar pushBack _fortress;
