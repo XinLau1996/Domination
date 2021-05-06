@@ -630,10 +630,12 @@ if (d_with_MainTargetEvents != 0) then {
 			case "RESCUE_DEFUSE": {
 				[_radius, _trg_center] spawn d_fnc_event_sideprisonerdefuse;
 			};
+			case "KILL_TRIGGERMAN": {
+				[_radius, _trg_center] spawn d_fnc_event_sidekilltriggerman;
+			};
 		};
 	};
 	
-	// todo - add more events - stop an execution, kidnap an officer, defuse a bomb, convoys through warzone
 	private _doEvent = false;
 	if (d_with_MainTargetEvents < 0) then {
 		// always do an event
@@ -650,8 +652,8 @@ if (d_with_MainTargetEvents != 0) then {
 		if (d_with_MainTargetEvents == -2 || {d_with_MainTargetEvents == -3 || {d_with_MainTargetEvents == -4}}) then {
 			// create multiple simultaneous events		
 			private _tmpMtEvents = + d_x_mt_event_types;
-			if (d_with_MainTargetEvents != -3) then {
-            	// guerrilla events are only eligible if d_with_MainTargetEvents == -3
+			if (d_with_MainTargetEvents != -3 && {d_with_MainTargetEvents != -4}) then {
+            	// guerrilla events are only eligible if d_with_MainTargetEvents == -3 or -4
             	// remove guerrilla events from the temp array, do not select it here
             	_tmpMtEvents deleteAt (_tmpMtEvents find "GUERRILLA_INFANTRY");
 			};

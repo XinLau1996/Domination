@@ -16,7 +16,7 @@ params ["_target_radius", "_target_center"];
 
 private _mt_event_key = format ["d_X_MTEVENT_%1", d_cur_tgt_name];
 
-private _trigger = [_target_center, [225,225,0,false,10], ["ANYPLAYER","PRESENT",true], ["this","thisTrigger setVariable ['d_event_start_time', time];",""]] call d_fnc_CreateTriggerLocal;
+private _trigger = [_target_center, [120,120,0,false,10], ["ANYPLAYER","PRESENT",true], ["this","thisTrigger setVariable ['d_event_start_time', time];",""]] call d_fnc_CreateTriggerLocal;
 
 private _event_start_time = nil;
 private _event_target_name = nil;
@@ -33,6 +33,7 @@ d_priority_target addEventHandler ["Killed", {
 	// reset
 	d_priority_target = nil;
 	publicVariable "d_priority_target";
+	(_this # 0) removeEventHandler ["Killed", _thisEventhandler];
 }];
 
 diag_log [format["markedfordeath begins start time: %1 _event_target_name: %2", _event_start_time, _event_target_name]];

@@ -36,7 +36,7 @@ if (_townNearbyPos isEqualTo []) exitWith {
 
 private _x_mt_event_ar = [];
 
-private _trigger = [_target_center, [600,600,0,false,30], [d_own_side,"PRESENT",true], ["this","thisTrigger setVariable ['d_event_start', true]",""]] call d_fnc_CreateTriggerLocal;
+private _trigger = [_target_center, [475,475,0,false,30], [d_own_side,"PRESENT",true], ["this","thisTrigger setVariable ['d_event_start', true]",""]] call d_fnc_CreateTriggerLocal;
 
 waitUntil {sleep 0.1; !isNil {_trigger getVariable "d_event_start"}};
 
@@ -120,6 +120,11 @@ while {sleep 1; !d_mt_done} do {
 	sleep 15;
 };
 
+d_mt_event_messages_array deleteAt (d_mt_event_messages_array find _eventDescription);
+publicVariable "d_mt_event_messages_array";
+
+deleteVehicle _trigger;
+
 if (d_ai_persistent_corpses == 0) then {
 	waitUntil {sleep 10; d_mt_done};
 } else {
@@ -128,8 +133,3 @@ if (d_ai_persistent_corpses == 0) then {
 
 //cleanup
 _x_mt_event_ar call d_fnc_deletearrayunitsvehicles;
-
-deleteVehicle _trigger;
-
-d_mt_event_messages_array deleteAt (d_mt_event_messages_array find _eventDescription);
-publicVariable "d_mt_event_messages_array";

@@ -13,16 +13,23 @@ if !(isServer) exitWith {};
 
 params ["_target_radius", "_target_center"];
 
+private ["_eventArmorHeavy", "_eventArmorMedium", "_eventArmorLight"];
 //armor types
-#ifndef __IFA3LITE__
-private _eventArmorHeavy = "I_MBT_03_cannon_F";
-private _eventArmorMedium = "I_APC_tracked_03_cannon_F";
-private _eventArmorLight = "I_LT_01_cannon_F";
-#else
-private _eventArmorHeavy = "LIB_PzKpfwIV_H";
-private _eventArmorMedium = "LIB_StuG_III_G";
-private _eventArmorLight = "LIB_SdKfz251";
-#endif
+call {
+	if (d_ifa3lite) exitWith {
+		_eventArmorHeavy = "LIB_PzKpfwIV_H";
+		_eventArmorMedium = "LIB_StuG_III_G";
+		_eventArmorLight = "LIB_SdKfz251";
+	};
+	if (d_vn) exitWith {
+		_eventArmorHeavy = "vn_i_armor_m41_01";
+		_eventArmorMedium = "vn_i_armor_type63_01";
+		_eventArmorLight = "vn_i_wheeled_m151_mg_01_mp";
+	};
+	_eventArmorHeavy = "I_MBT_03_cannon_F";
+	_eventArmorMedium = "I_APC_tracked_03_cannon_F";
+	_eventArmorLight = "I_LT_01_cannon_F";
+};
 
 //array of armor vehicles to create
 private _eventArmorAll = [];
@@ -77,7 +84,7 @@ if (_townNearbyPos isEqualTo []) exitWith {
 
 private _x_mt_event_ar = [];
 
-private _trigger = [_target_center, [600,600,0,false,30], [d_own_side,"PRESENT",true], ["this","thisTrigger setVariable ['d_event_start', true]",""]] call d_fnc_CreateTriggerLocal;
+private _trigger = [_target_center, [475,475,0,false,30], [d_own_side,"PRESENT",true], ["this","thisTrigger setVariable ['d_event_start', true]",""]] call d_fnc_CreateTriggerLocal;
 
 waitUntil {sleep 0.1;!isNil {_trigger getVariable "d_event_start"}};
 
@@ -144,6 +151,9 @@ while {!d_mt_done} do {
 	sleep 15;
 };
 
+d_mt_event_messages_array deleteAt (d_mt_event_messages_array find _eventDescription);
+publicVariable "d_mt_event_messages_array";
+
 if (d_ai_persistent_corpses == 0) then {
 	waitUntil {sleep 10; d_mt_done};
 } else {
@@ -153,6 +163,3 @@ if (d_ai_persistent_corpses == 0) then {
 //cleanup
 _x_mt_event_ar call d_fnc_deletearrayunitsvehicles;
 deleteVehicle _trigger;
-
-d_mt_event_messages_array deleteAt (d_mt_event_messages_array find _eventDescription);
-publicVariable "d_mt_event_messages_array";

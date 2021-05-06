@@ -292,9 +292,6 @@ d_x_drop_array =
 		if (d_unsung) exitWith {
 			[[], [localize "STR_DOM_MISSIONSTRING_22", "uns_willys_2"], [localize "STR_DOM_MISSIONSTRING_20", "Box_NATO_Ammo_F"]]
 		};
-		if (d_vn) exitWith {
-			[[], [localize "STR_DOM_MISSIONSTRING_22", ""], [localize "STR_DOM_MISSIONSTRING_20", ""]]
-		};
 		[[], [localize "STR_DOM_MISSIONSTRING_22", ["B_MRAP_01_F", "B_T_LSV_01_unarmed_F"] select (d_tanoa || {d_livonia})], [localize "STR_DOM_MISSIONSTRING_20", "Box_NATO_Ammo_F"]]
 	};
 #endif
@@ -1218,9 +1215,6 @@ if (!d_gmcwgwinter) then {
 			if (d_unsung) exitWith {
 				"uns_C130_H"
 			};
-			if (d_vn) exitWith {
-				""
-			};
 			if (d_ifa3lite) exitWith {
 				""
 			};
@@ -1270,9 +1264,6 @@ if (!d_gmcwgwinter) then {
 			};
 			if (d_rhs) exitWith {
 				"RHS_A10"
-			};
-			if (d_vn) exitWith {
-				""
 			};
 			"B_Plane_CAS_01_F"
 		};
@@ -1363,9 +1354,6 @@ if (!d_gmcwgwinter) then {
 					"UNS_ASSAULT_BOAT_VC"
 				};
 				if (d_ifa3lite) exitWith {
-					""
-				};
-				if (d_vn) exitWith {
 					""
 				};
 				"O_Boat_Armed_01_hmg_F"
@@ -1499,9 +1487,6 @@ if (!d_gmcwgwinter) then {
 		if (d_unsung) exitWith {
 			"uns_m163"
 		};
-		if (d_vn) exitWith {
-			""
-		};
 		if (d_tanoa || {d_livonia}) exitWith {
 			"B_T_APC_Tracked_01_AA_F"
 		};
@@ -1545,9 +1530,6 @@ if (!d_gmcwgwinter) then {
 		};
 		if (d_unsung) exitWith {
 			"uns_m48a3"
-		};
-		if (d_vn) exitWith {
-			""
 		};
 		if (d_tanoa || {d_livonia}) exitWith {
 			"B_T_MBT_01_cannon_F"
@@ -1827,9 +1809,6 @@ if (!d_gmcwgwinter) then {
 				if (d_unsung) exitWith {
 					["uns_Mi8TV_VPAF_MG"]
 				};
-				if (d_vn) exitWith {
-					[]
-				};
 				["O_Heli_Attack_02_F"]
 			};
 		};
@@ -2027,9 +2006,6 @@ if (!d_gmcwgwinter) then {
 				};
 				if (d_unsung) exitWith {
 					["uns_Mi8TV_VPAF_MG"]
-				};
-				if (d_vn) exitWith {
-					[]
 				};
 				if (d_ifa3lite) exitWith {
 					[]
@@ -2452,9 +2428,6 @@ if (hasInterface) then {
 		};
 		if (d_unsung) exitWith {
 			["uns_willys"]
-		};
-		if (d_vn) exitWith {
-			[]
 		};
 		["B_Quadbike_01_F", "B_LSV_01_unarmed_F"]
 	};

@@ -21,7 +21,7 @@ private _mt_event_key = format ["d_X_MTEVENT_%1", d_cur_tgt_name];
 private _poss = [[[_target_center, 125]],[[_target_center, 15]]] call BIS_fnc_randomPos;
 private _x_mt_event_ar = [];
 
-private _trigger = [_poss, [225,225,0,false,30], [d_own_side,"PRESENT",true], ["this","thisTrigger setVariable ['d_event_start', true]",""]] call d_fnc_CreateTriggerLocal;
+private _trigger = [_poss, [120,120,0,false,30], [d_own_side,"PRESENT",true], ["this","thisTrigger setVariable ['d_event_start', true]",""]] call d_fnc_CreateTriggerLocal;
 
 waitUntil {sleep 0.1;!isNil {_trigger getVariable "d_event_start"}};
 
@@ -205,6 +205,9 @@ sleep 5.432;
 	};
 } forEach [_pilot1, _pilot2];
 
+d_mt_event_messages_array deleteAt (d_mt_event_messages_array find _eventDescription);
+publicVariable "d_mt_event_messages_array";
+
 deleteVehicle _trigger;
 deleteMarker _marker; 
 
@@ -214,6 +217,3 @@ waitUntil {sleep 10; d_mt_done};
 
 //cleanup
 _x_mt_event_ar call d_fnc_deletearrayunitsvehicles;
-
-d_mt_event_messages_array deleteAt (d_mt_event_messages_array find _eventDescription);
-publicVariable "d_mt_event_messages_array";
