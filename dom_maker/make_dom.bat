@@ -56,8 +56,8 @@ makePbo -AJNP %NEW_VER%
 rmdir /S /Q %NEW_VER%
 rmdir /S /Q %WORK_DIR%
 
-goto cleanup
-exit
+rem goto cleanup
+rem exit
 
 rem Blufor SOG Prairie
 set NEW_VER=co%D_NUM_PLAYERS%_domination_%D_VER%_blufor_vn.cam_lao_nam
@@ -221,6 +221,7 @@ rmdir /S /Q mifa3
 rmdir /S /Q ma3m
 cd CUR_DIR
 rem ArmaScriptCompiler.exe
+md %NEW_VER%
 xcopy %WORK_DIR%\*.* %NEW_VER% /E /Y
 makePbo -AJNP %NEW_VER%
 rmdir /S /Q %NEW_VER%
