@@ -293,7 +293,7 @@ d_x_drop_array =
 			[[], [localize "STR_DOM_MISSIONSTRING_22", "uns_willys_2"], [localize "STR_DOM_MISSIONSTRING_20", "Box_NATO_Ammo_F"]]
 		};
 		if (d_vn) exitWith {
-			[[], [localize "STR_DOM_MISSIONSTRING_22", "vn_b_wheeled_m151_01"], [localize "STR_DOM_MISSIONSTRING_20", "vn_us_fort_common_crate_01"]]
+			[[], [localize "STR_DOM_MISSIONSTRING_22", "vn_b_wheeled_m151_01"], [localize "STR_DOM_MISSIONSTRING_20", "vn_b_ammobox_05"]]
 		};
 		[[], [localize "STR_DOM_MISSIONSTRING_22", ["B_MRAP_01_F", "B_T_LSV_01_unarmed_F"] select (d_tanoa || {d_livonia})], [localize "STR_DOM_MISSIONSTRING_20", "Box_NATO_Ammo_F"]]
 	};
@@ -526,8 +526,14 @@ d_non_steer_para = "NonSteerable_Parachute_F";
 
 call {
 	if (d_own_side == "WEST") exitWith {
-		d_the_box = "Box_NATO_Wps_F";
-		d_the_base_box = "B_supplyCrate_F";
+		call {
+			if (d_vn) exitWith {
+				d_the_box = "vn_b_ammobox_04";
+				d_the_base_box = "vn_b_ammobox_06";
+			};
+			d_the_box = "Box_NATO_Wps_F";
+			d_the_base_box = "B_supplyCrate_F";
+		};
 	};
 	if (d_own_side == "EAST") exitWith {
 		d_the_box = "Box_East_Wps_F";
@@ -2081,11 +2087,11 @@ if (!d_gmcwgwinter) then {
 	// Needs a building which can be entered by AI (as they will respawn inside)
 	// can only be destroyed by satchel charges!!!
 	// no marker gets created!
-#ifndef __VN__
+//#ifndef __VN__
 	d_barracks_building = "Land_BagBunker_01_large_green_F";
-#else
-	d_barracks_building = "Land_vn_o_shelter_05";
-#endif
+//#else
+	//d_barracks_building = "Land_vn_o_shelter_05";
+//#endif
 
 	// same as barracks building. But enemy AI vehicles do not spawn inside the main target area but outside
 	// if destroyed no more enemy vehicles respawn
@@ -2262,6 +2268,15 @@ if (!d_gmcwgwinter) then {
 		"uns_willys_2", 0.40,
 		"C_Tractor_01_F", 0.10
 	];
+	
+	_civVehiclesWeightedRuralVn = [
+		"C_Truck_02_covered_F", 0.15,
+		"C_Truck_02_transport_F", 0.15,
+		"C_Van_01_box_F", 0.15,
+		"C_Tractor_01_F", 0.05,
+		"vn_c_wheeled_m151_01", 0.25,
+		"vn_c_wheeled_m151_02", 0.25
+	];
 
 	d_civ_vehicles_weighted =
 #ifdef __ALTIS__
@@ -2307,7 +2322,7 @@ if (!d_gmcwgwinter) then {
 		_civVehiclesWeightedRuralLivonia;
 #endif
 #ifdef __VN__
-		_civVehiclesWeightedCityWealthHigh;
+		_civVehiclesWeightedRuralVn;
 #endif
 
 	//civilian faces

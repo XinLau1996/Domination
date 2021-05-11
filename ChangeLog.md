@@ -143,11 +143,29 @@
 - `Tanoa CfgIdentities` 缺失
 - 一些客户端变量必须从 `fn_preinit.sqf` 移到 `initcommon.sqf`，因为预初始化中没有初始化变量（例如空中出租车）
 
-#### 更新
+#### 更新:
 
 - 俄语翻译
 - 简体中文翻译
 - 许多脚本再次优化
+
+### 4.50
+
+#### 添加:
+
+- 参数 `vn_arsenalShowMelee = 1` 在 `description.ext` 以便 `SOG` 近战武器出现在虚拟兵工厂 (副武器/手枪)
+- 主线任务是 `SOG` 平民和汽车
+- 玩家完成主要目标项目的得分
+
+#### 修复:
+
+- Fixed: Short sound when taking a camp was not played on clients
+- `SOG` 版本在基地重生时，玩家可能出现在机库顶部
+- 空投弹药箱在 `SOG` 版本中不起作用
+
+#### 更新:
+
+- 简体中文翻译
 
 - - - - - - - - - -
 > 更新日志
