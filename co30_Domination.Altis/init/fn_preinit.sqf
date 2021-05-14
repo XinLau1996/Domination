@@ -702,9 +702,16 @@ if (isServer) then {
 					};
 					for "_i" from 0 to (count _conf - 1) do {
 						private _cname = configName (_conf select _i);
+						__TRACE_1("","_cname")
 						private _fidx = _dbresult findIf {_x # 0 == _cname};
+						__TRACE_1("","_fidx")
 						if (_fidx != -1) then {
-							paramsArray set [_i, _dbresult # _fidx # 1];
+							private _val = _dbresult # _fidx # 1;
+							if (_val == 0 && {_cname in ["xr_max_lives", "d_MainTargets_num", "d_ai_awareness_rad", "d_ai_pursue_rad", "d_max_camp_cnt"]}) then {
+								_val = -1;
+							};
+							__TRACE_1("","_val")
+							paramsArray set [_i, _val];
 						};
 					};
 					publicVariable "paramsArray";
