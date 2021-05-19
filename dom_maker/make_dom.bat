@@ -1,14 +1,14 @@
 rem Domination Build Batch, really shitty batch file :D
-rem æ‰¹é‡æ„å»ºã€Šç»Ÿæ²»ã€‹ï¼ŒçœŸæ˜¯ç³Ÿç³•çš„æ‰¹å¤„ç†æ–‡ä»¶ :D
+rem ÅúÁ¿¹¹½¨¡¶Í³ÖÎ¡·£¬ÕæÊÇÔã¸âµÄÅú´¦ÀíÎÄ¼ş :D
 rem needs makepbo from mikero https://mikero.bytex.digital/Downloads needs makePBO and dePBO
-rem éœ€è¦ MakePBO è·Ÿ DePbo æ¥è‡ª mikero ä¸‹è½½ https://mikero.bytex.digital/Downloads
+rem ĞèÒª MakePBO ¸ú DePbo À´×Ô mikero ÏÂÔØ https://mikero.bytex.digital/Downloads
 rem just copy MakePBO.exe and DePbo.dll in the dom_maker folder
-rem åªéœ€å¤åˆ¶ MakePBO.exeå’Œ DePbo.dll åˆ° dom_maker æ–‡ä»¶å¤¹ä¸­
+rem Ö»Ğè¸´ÖÆ MakePBO.exeºÍ DePbo.dll µ½ dom_maker ÎÄ¼ş¼ĞÖĞ
 
 set BASE_MASTER=co30_Domination.Altis
 set MASTER=co30_Domination.Altis
-set D_VER=4_51
-set D_BNVER=4.51
+set D_VER=4_52
+set D_BNVER=4.52
 set D_NUM_PLAYERS=40
 set D_NUM_PLAYERS_TT=50
 set D_NUM_PLAYERS_CO=40
@@ -24,7 +24,7 @@ md %MASTER%
 xcopy ..\%BASE_MASTER%\*.* %MASTER% /E /Y
 
 rem Blufor Altis
-rem è“æ–¹ Altis
+rem À¶·½ Altis
 set NEW_VER=co%D_NUM_PLAYERS%_domination_%D_VER%_blufor.altis
 set MISSION_SQM=..\mission_sqm\mission_blufor_altis_bin.sqm
 set X_SETUP=..\mission_sqm\x_setup_blufor_altis.sqf
@@ -127,7 +127,7 @@ rmdir /S /Q %WORK_DIR%
 
 
 rem Blufor Stratis
-rem è“æ–¹ Stratis
+rem À¶·½ Stratis
 set NEW_VER=co%D_NUM_PLAYERS%_domination_%D_VER%_blufor.stratis
 set MISSION_SQM=..\mission_sqm\mission_blufor_stratis_bin.sqm
 set X_SETUP=..\mission_sqm\x_setup_blufor_stratis.sqf
@@ -161,7 +161,7 @@ rmdir /S /Q %WORK_DIR%
 
 
 rem Blufor RHS Altis
-rem è“æ–¹ RHS Altis
+rem À¶·½ RHS Altis
 set NEW_VER=co%D_NUM_PLAYERS%_domination_%D_VER%_rhs_blufor.altis
 set MISSION_SQM=..\mission_sqm\mission_blufor_rhs_altis_bin.sqm
 set X_SETUP=..\mission_sqm\x_setup_blufor_rhs_altis.sqf
@@ -195,7 +195,7 @@ rmdir /S /Q %WORK_DIR%
 
 
 rem Blufor Carrier Altis
-rem è“æ–¹ Carrier Altis
+rem À¶·½ Carrier Altis
 set NEW_VER=co%D_NUM_PLAYERS%_domination_carrier_%D_VER%_blufor.altis
 set MISSION_SQM=..\mission_sqm\mission_blufor_carrier_altis_bin.sqm
 set X_SETUP=..\mission_sqm\x_setup_blufor_carrier_altis.sqf
@@ -229,7 +229,7 @@ rmdir /S /Q %WORK_DIR%
 
 
 rem Blufor Malden
-rem è“æ–¹ Malden
+rem À¶·½ Malden
 set NEW_VER=co%D_NUM_PLAYERS%_domination_%D_VER%_blufor.malden
 set MISSION_SQM=..\mission_sqm\mission_blufor_malden_bin.sqm
 set X_SETUP=..\mission_sqm\x_setup_blufor_malden.sqf
