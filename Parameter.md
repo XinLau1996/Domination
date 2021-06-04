@@ -75,6 +75,13 @@
 #### **d_mt_respawngroups / 重新生成主线任务敌方 AI 单位作为增援部队：**
 > 默认： 0 （Yes, 启用； 1 or No 禁用）<br/>
 
+#### **d_bar_mhq_destroy / AO（占领区域）敌军营房和车辆 MHQ（基地）必须用炸药摧毁：**
+> 默认: 1 (Yes, 启用; 1 or No 禁用)<br/>
+> 如果设置为 `no` 或 `0` 则您必须像营地一样使用军营和车辆 MHQ（基地）
+
+#### **d_allow_observers / AO（占领区域）炮兵和 CAS（近距离空中支援）的敌人 `AI` 观察员：**
+> 默认: 1 (Yes, 启用; 0 or No 禁用)<br/>
+
 #### **d_ai_persistent_corpses / 永久显示 AI 尸体：**
 > 默认： 1 （No, 无效； 0 or Yes 启用）<br/>
 
