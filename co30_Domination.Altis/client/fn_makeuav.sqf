@@ -65,6 +65,7 @@ _uav spawn {
 		(findDisplay 160) closeDisplay 1;
 	};
 
+	// A3_206 deleteVehicleCrew _uav;
 	{_uav deleteVehicleCrew _x} forEach _crew;
 	deleteVehicle _uav;
 	

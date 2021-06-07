@@ -42,6 +42,7 @@ for "_i" from 0 to (__count_arti - 1) do {
 		d_dead_arti = d_dead_arti + 1;
 		params ["_v"];
 		_v removeAllEventHandlers "killed";
+		// A3_206 deleteVehicleCrew v;
 		{_v deleteVehicleCrew _x} forEach (crew _v);
 	}];
 #ifdef __TT__
