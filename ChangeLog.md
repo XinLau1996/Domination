@@ -2,12 +2,23 @@
 
 ### 4.56
 
+#### 添加：
+
+- `d_sm_vec_weighting` 到 `dom_settings` 表（可以设置飞机、直升机、坦克和其他车辆的 `selectRandomWeight`(选择随机权重) 函数的权重）
+
+#### 变更：
+
+- 不再连续选择支线任务奖励车辆
+- `Altis Blufor` 版本的 `Recruit` 终端更靠近重生点
+
 #### 修复：
 
 - 如果 `d_with_ranked` 设置为 `2`（排名模式开启，但武器未排名），则不处理 `d_remove_from_arsenal`
 - 主要目标任务建筑在创建 30 秒后被摧毁
 - 没有使用新的动态参数创建狙击手
 - 带有重复字符 `Score::` 的 HUD
+- 当玩家 `AI` 单独在车辆中时，车辆标记不会显示
+- 当 `AI` 攻击性射击 (`d_ai_aggressiveshoot`) 被激活时，`AI` 正在向失去知觉的玩家射击
 
 #### 调整：
 
