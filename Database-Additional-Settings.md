@@ -54,46 +54,46 @@
 > - 4, // 医疗兵在治愈另一个单位时获得的分数<br/>
 > - 1, // 玩家在运送他人时获得的分数<br/>
 > - 20, // 激活卫星视图所需的分数<br/>
-> - 20, // 构建 FARP（前沿补给点） 所需的积分（工程师）<br/>
+> - 20, // 构建 FARP（前沿补给点） 所需的分数（工程师）<br/>
 > - 10, // 玩家因复活另一名玩家而获得的分数<br/>
-> - 20, // points a Squad Leader needs for CAS<br/>
-> - 20  // points a player gets for bringing a wreck to the repair point<br/>
-#### **d_points_needed**
+> - 20, // CAS（近距离空中支援）小队队长需要的分数<br/>
+> - 20  // 玩家将残骸带到维修点获得的分数<br/>
+#### **d_points_needed / 需要积分：**
 > 默认： [20,50,90,140,200,270,500]<br/>
-> Points needed for to progress rank (Corporal, Sergeant, Lieutenant, Captain, Major, Colonel and General).<br/>
-> In non ranked version this is just cosmetics<br><br/>
-#### **d_points_needed_db**
+> 晋升军衔所需的积分（下士、中士、中尉、上尉、少校、上校和将军）。<br/>
+> 在非排名版这只是装饰<br/>
+#### **d_points_needed_db / 需要积分DB：**
 > 默认： [500,2000,5000,9000,14000,20000,30000]<br/>
-> Same as d_points_needed, but as player stats like score is saved and added to a database it needs a little bit more higher score to make it interesting<br/>
-#### **d_ai_groups_respawn_time**
+> 与 `d_points_needed` 相同，但随着得分等玩家统计数据被保存并添加到数据库中，它需要更高的分数才能使其有趣<br/>
+#### **d_ai_groups_respawn_time / AI组重生时间：**
 > 默认： [250,150,320,170]<br/>
-> These are the base and min respawn times for vehicle and inf groups at main targets (player numbers also count)<br/>
-> Inf base time, inf min time, vehicle base time, vehicle min time, all in seconds<br/>
-> Means, inf base time minus number of players but at least wait 150 to respawn a group, same for vehicles<br/>
-#### **d_set_pl_score_db**
+> 这些是主要目标的载具和 inf 组的基本和最小重生时间（玩家数量也计算在内）<br/>
+> Inf基本时间、Inf最小时间、车辆基本时间、车辆最小时间，均以秒为单位<br/>
+> 意味着，inf 基础时间减去玩家数量，但至少要等待 150 才能重生一个组，车辆也是如此<br/>
+#### **d_set_pl_score_db / 设置 pl 分数 db：**
 > 默认： true<br/>
-> If set to false player score will not be saved to the database but will always be 0 when a Domination mission starts<br/>
-#### **d_launcher_cooldown**
+> 如果设置为 false 玩家分数将不会保存到数据库中，但在统治任务开始时将始终为 0<br/>
+#### **d_launcher_cooldown / 发射器冷却时间：**
 > 默认： 120<br/>
-> Launcher cooldown time when a player fires a guided launcher. If set to 0 there will be no cooldown time<br/>
-#### **d_number_attack_planes**
+> 玩家发射引导发射器时的发射器冷却时间。如果设置为 0 将没有冷却时间<br/>
+#### **d_number_attack_planes / 攻击机数量：**
 > 默认： 1<br/>
-> Number of attack planes simultaneously over the main target<br/>
-#### **d_number_attack_choppers**
+> 主要目标上空同时出现的攻击机数量<br/>
+#### **d_number_attack_choppers / 武装直升机数量：**
 > 默认： 1<br/>
-> Number of attack choppers simultaneously over the main target<br/>
-#### **d_number_light_attack_choppers**
+> 主目标上同时出现的武装直升机数量<br/>
+#### **d_number_light_attack_choppers / 轻型武装直升机数量：**
 > 默认： 1<br/>
-> Number of light attack choppers simultaneously over the main target<br/>
-#### **d_number_attack_uavs**
+> 主目标上同时出现的轻型武装直升机数量<br/>
+#### **d_number_attack_uavs / 武装无人机数量：**
 > 默认： 1<br/>
-> Number of UAVs simultaneously over the main target<br/>
-#### **d_noambient_bf_sounds**
+> 主目标上同时出现的武装无人机数量<br/>
+#### **d_noambient_bf_sounds / 无环境声音：**
 > 默认： false<br/>
-> If set to true it dsiables the ambient sound at main targets<br/>
-#### **d_time_until_next_sidemission**
+> 如果设置为 true，它会关闭主要目标的环境声音<br/>
+#### **d_time_until_next_sidemission / 到下一个支线任务的时间：**
 > 默认： [[10,300],[20,400],[30,500],[500,600]]<br/>
 > 10 名玩家需要 300 秒，20 名玩家需要 400 秒，以此类推<br/>
-#### **d_uids_def_choppers**
+#### **d_uids_def_choppers / 允许使用基地直升机玩家 UID：**
 > 默认： []<br/>
-> Add player UIDs from players who are allowed too fly the initial base choppers; for Example: ["784938984678349"]; Empty = no check<br/>
+> 添加玩家 UID，玩家中被允许使用基地直升机；例如：["784938984678349"]；空 = 不检查<br/>
