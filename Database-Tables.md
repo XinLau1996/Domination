@@ -2,11 +2,11 @@
 
 ## dom_params2
 
-> 保存来自 description.ext（类参数）的所有参数。任务需要启动一次以使用 description.ext 中的所有可用参数填充表格，之后，您可以更改 dom_params2 表中的参数
+> 保存来自 description.ext（类参数）的所有参数。任务需要启动一次以使用 `description.ext` 中的所有可用参数填充表格，之后，您可以更改 `dom_params2` 表中的参数
 
 ## dom_settings
 
-> 额外的非参数设置。检查 Wiki 中的 [其他数据库设置](Database-Additional-Settings.md) 页面以获取所有可用条目。dom_settings 是唯一一个填充了变量名和值的表。
+> 额外的非参数设置。检查[其他数据库设置](Database-Additional-Settings.md)页面以获取所有可用条目。`dom_settings` 是唯一一个填充了变量名和值的表。
 
 ## missionsave
 
