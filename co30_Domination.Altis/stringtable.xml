@@ -3608,7 +3608,7 @@
 <Japanese>%1にある新型試作APCを見つけて破壊しろ。\n</Japanese>
 <Original>Find a new APC prototype in %1 and destroy it.\n</Original>
 <Russian>Найдите прототип техники в городе %1 и уничтожьте его\n</Russian>
-<Chinesesimp>在 %1 区域找到一个新型APC样品车并摧毁。\n</Chinesesimp>
+<Chinesesimp>在 %1 区域找到一个新型APC（装甲运兵车）样品车并摧毁。\n</Chinesesimp>
 <Chinese>在 %1 區域找到一個新型APC樣品車並摧毀.\n</Chinese>
 <French>Trouvez un nouveau prototype APC dans %1 et détruisez-le.\n</French>
 </Key>
@@ -6164,7 +6164,7 @@
 <Japanese>あなたのチームがプロトタイプのトラックを破壊しました。</Japanese>
 <Original>Your team destroyed the truck prototype.</Original>
 <Russian>Ваша команда уничтожила целевой транспорт.</Russian>
-<Chinesesimp>你的小队摧毁了APC。</Chinesesimp>
+<Chinesesimp>你的小队摧毁了APC（装甲运兵车）。</Chinesesimp>
 <Chinese>你的小隊摧毀了APC.</Chinese>
 <French>Votre équipe a détruit le camion prototype.</French>
 </Key>
@@ -9680,7 +9680,7 @@
 <Japanese>よくやった。装甲車を入手した。</Japanese>
 <Original>Good job. You got the APC.</Original>
 <Russian>Отличная работа! БТР уничтожен.</Russian>
-<Chinesesimp>漂亮！你得到了APC。</Chinesesimp>
+<Chinesesimp>漂亮！你得到了APC（装甲运兵车）。</Chinesesimp>
 <Chinese>漂亮!你得到了APC.</Chinese>
 <French>Bon travail. Vous avez l'APC.</French>
 </Key>
@@ -11301,7 +11301,7 @@
 <Japanese>Enemy forces are preparing an enhanced prototype APC. This is a good chance to steal and bring it to your base, before enemy troops use it</Japanese>
 <Original>Enemy forces are preparing an enhanced prototype APC. This is a good chance to steal and bring it to your base, before enemy troops use it</Original>
 <Russian>Противник собирается испытать прототип нового БТР. Это хорошая возможность для его уничтожения!</Russian>
-<Chinesesimp>敌军正准备加强原型 APC。在敌人部队使用它之前，这是一个很好的机会，可以偷取并带到你的基地</Chinesesimp>
+<Chinesesimp>敌军正准备加强原型 APC（装甲运兵车）。在敌人部队使用它之前，这是一个很好的机会，可以偷取并带到你的基地</Chinesesimp>
 <Chinese>敵軍正準備加強原型APC。在敵人部隊使用它之前，這是一個很好的機會，可以偷取並帶到你的基地</Chinese>
 <French>Les forces ennemies préparent un prototype APC amélioré. C'est une bonne chance de le voler et de l'apporter à votre base, avant que les troupes ennemies l'utilisent</French>
 </Key>
@@ -14533,6 +14533,18 @@
 <Chinesesimp>正在获取对象...</Chinesesimp>
 <Chinese>Taking object...</Chinese>
 <French>Taking object...</French>
+</Key>
+<Key ID="STR_DOM_MISSIONSTRING_SUPPRESS_VOICES">
+<English>Disable voices:</English>
+<Spanish>Disable voices:</Spanish>
+<Portuguese>Disable voices:</Portuguese>
+<Korean>Disable voices:</Korean>
+<Japanese>Disable voices:</Japanese>
+<Original>Disable voices:</Original>
+<Russian>Disable voices:</Russian>
+<Chinesesimp>禁用语音：</Chinesesimp>
+<Chinese>Disable voices:</Chinese>
+<French>Disable voices:</French>
 </Key>
 </Container>
 </Package>
