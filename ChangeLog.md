@@ -5,6 +5,9 @@
 #### 添加：
 
 - `d_sm_vec_weighting` 到 `dom_settings` 表（可以设置飞机、直升机、坦克和其他车辆的 `selectRandomWeight`(选择随机权重) 函数的权重）
+- 参数 `d_WithVoicesDisabled`（默认 0）禁用语音，目前仅适用于使用他们的模块的 `VN` 地图
+- 新参数 `d_pnspace_msave`（默认为 1，启用），“如果没有可用的数据库，则将任务进度保存到 profileNamespace”
+- 新参数 `d_pnspace_msave_auto`（默认为 1，启用），“已保存的 profileNamespace 任务进度自动加载”
 
 #### 变更：
 
